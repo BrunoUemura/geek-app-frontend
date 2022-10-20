@@ -1,17 +1,13 @@
-import { ILists } from "../../interfaces/ILists";
-import ListComponent from "../ListComponent";
-import { Container } from "./styles";
+import { ListCard } from "../ListCard";
+import { ListProps } from "./types";
+import "./styles.scss";
 
-type Props = {
-  lists: ILists[];
-};
-
-export default function List({ lists }: Props) {
+export function List({ lists }: ListProps) {
   return (
-    <Container>
+    <div className="list-component">
       {lists?.map((list) => {
-        return <ListComponent key={list.id} {...list} />;
+        return <ListCard key={list.id} {...list} />;
       })}
-    </Container>
+    </div>
   );
 }

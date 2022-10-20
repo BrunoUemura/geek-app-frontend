@@ -1,7 +1,20 @@
-import { Route, useParams, useSearchParams } from "react-router-dom";
+import { Route, useNavigate, useParams } from "react-router-dom";
+import { ROUTES } from "../../routes/constants";
 
 export default function ListsDetails() {
+  const navigate = useNavigate();
   const { id } = useParams();
 
-  return <div>List {id} Details Page</div>;
+  console.log(id);
+
+  const handleEdit = () => {
+    navigate(`${ROUTES.LIST}/${id}/edit`, { replace: true });
+  };
+
+  return (
+    <div>
+      <span>List {id} Details Page</span>
+      <button onClick={handleEdit}>Edit</button>
+    </div>
+  );
 }

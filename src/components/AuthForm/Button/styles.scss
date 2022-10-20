@@ -1,0 +1,14 @@
+.form__button {
+  padding: 0.5rem;
+  margin-top: 0.8rem;
+  margin-bottom: 1rem;
+
+  border: 0;
+  background-color: #0f62fe;
+  color: #fff;
+  font-size: medium;
+
+  &:hover {
+    background-color: #1b44fd;
+  }
+}

@@ -1,15 +1,15 @@
 import { BrowserRouter } from "react-router-dom";
-
-import Navbar from "./components/Navbar";
+import { AuthProvider } from "./contexts/AuthProvider";
 import AppRoutes from "./routes";
 
-export function App() {
+import "./styles/global.scss";
+
+export default function App() {
   return (
-    <div className="App">
+    <AuthProvider>
       <BrowserRouter>
-        <Navbar />
         <AppRoutes />
       </BrowserRouter>
-    </div>
+    </AuthProvider>
   );
 }

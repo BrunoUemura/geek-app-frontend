@@ -1,32 +1,47 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import List from "../../components/List";
-import { useValidateAuth } from "../../hooks/useValidateAuth";
-import { ILists } from "../../interfaces/ILists";
-import { list } from "../../services/list";
-import { retrieveUserId } from "../../utils/retrieveUserId";
-import { Container } from "./styles";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Lists() {
-  const [lists, setLists] = useState<ILists[]>([]);
+import { List } from "../../components/List";
+import { ILists } from "../../types/ILists";
+import { listService } from "../../services/listService";
+import { useAuth } from "../../hooks/useAuth";
+import { ROUTES } from "../../routes/constants";
+import { Button } from "../../components/UI/Button";
 
-  useValidateAuth();
+import "./styles.scss";
+
+export function Lists() {
+  const navigate = useNavigate();
+  const { isAuthenticated, id, token, logout } = useAuth();
+
+  const [lists, setLists] = useState<ILists[] | null>([]);
+
   useEffect(() => {
+    if (!isAuthenticated) {
+      return navigate(ROUTES.LOGIN, { replace: true });
+    }
+
     (async () => {
-      const token = localStorage.getItem("auth_token") || "";
-      const userId = retrieveUserId(token);
-      const { data } = await list.fetchListByUserId(userId, token);
-      setLists(data);
+      const response = await listService.fetchListByUserId(id, token);
+      console.log(response);
+
+      setLists(response);
+
+      if (!response) {
+        logout();
+      }
+
+      setLists(response);
     })();
-  }, []);
+  }, [isAuthenticated]);
 
   return (
-    <Container>
-      <Link className="new-btn" to={`/lists/new`}>
-        <span>New List</span>
+    <div className="list-container">
+      <Link className="list-container__new-btn" to={ROUTES.LIST_NEW}>
+        <Button label="New List" />
       </Link>
 
       <List lists={lists} />
-    </Container>
+    </div>
   );
 }

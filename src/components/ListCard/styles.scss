@@ -1,0 +1,15 @@
+.list-card-component {
+  background: #fff;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 10px 10px 10px #0000001a;
+  }
+}
