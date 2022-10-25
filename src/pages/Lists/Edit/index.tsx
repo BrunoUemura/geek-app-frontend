@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { ROUTES } from "../../routes/constants";
-import { listService } from "../../services/listService";
+import { ROUTES } from "../../../routes/routes";
+import { listService } from "../../../services/listService";
 import "./styles.scss";
 
 export function ListEdit() {

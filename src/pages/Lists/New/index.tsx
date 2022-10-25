@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ROUTES } from "../../routes/constants";
-import { listService } from "../../services/listService";
+import { ROUTES } from "../../../routes/routes";
+import { listService } from "../../../services/listService";
 
 export function ListNew() {
   const navigate = useNavigate();

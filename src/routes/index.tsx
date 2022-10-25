@@ -1,13 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 
+import { ROUTES } from "./routes";
+import { NotFound } from "../pages/404";
 import { Lists } from "../pages/Lists";
-import { ListNew } from "../pages/ListsNew";
-import { ListEdit } from "../pages/ListsEdit";
+import { ListsDetails } from "../pages/Lists/Details";
+import { ListEdit } from "../pages/Lists/Edit";
+import { ListNew } from "../pages/Lists/New";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
-import { NotFound } from "../pages/404";
-import { ROUTES } from "./constants";
-import ListsDetails from "../pages/ListsDetails";
 
 export default function AppRoutes() {
   return (

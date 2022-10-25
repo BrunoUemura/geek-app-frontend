@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { ROUTES } from "../../routes/constants";
+import { ROUTES } from "../../routes/routes";
 import { ILists } from "../../types/ILists";
 import "./styles.scss";
 

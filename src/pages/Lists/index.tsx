@@ -5,7 +5,7 @@ import { List } from "../../components/List";
 import { ILists } from "../../types/ILists";
 import { listService } from "../../services/listService";
 import { useAuth } from "../../hooks/useAuth";
-import { ROUTES } from "../../routes/constants";
+import { ROUTES } from "../../routes/routes";
 import { Button } from "../../components/UI/Button";
 
 import "./styles.scss";

@@ -5,7 +5,7 @@ import "./styles.scss";
 import { Button } from "../../components/AuthForm/Button";
 import { Input } from "../../components/AuthForm/Input";
 import { useAuth } from "../../hooks/useAuth";
-import { ROUTES } from "../../routes/constants";
+import { ROUTES } from "../../routes/routes";
 import { registerService } from "../../services/authService";
 
 export function Register() {

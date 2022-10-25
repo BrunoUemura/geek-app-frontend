@@ -1,28 +1,22 @@
 import { api } from "./api";
 import { ILists } from "../types/ILists";
-
-interface IResponseSingle {
-  status: string;
-  data: ILists | null;
-}
-
-interface IResponseArray {
-  status: string;
-  data: ILists[] | null;
-}
+import { AxiosError } from "axios";
 
 async function fetchListByListId(
   listId: string,
   token: string
 ): Promise<ILists | null> {
   try {
-    const { data } = await api.get(`/list/${listId}`, {
+    const url = `/list/${listId}`;
+    const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
+    };
 
-    return data?.data;
+    const { data: response } = await api.get(url, config);
+
+    return response?.data;
   } catch (error) {
     return null;
   }
@@ -33,13 +27,16 @@ async function fetchListByUserId(
   token: string = ""
 ): Promise<ILists[] | null> {
   try {
-    const { data } = await api.get(`/list?user_id=${userId}`, {
+    const url = `/list?user_id=${userId}`;
+    const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
+    };
 
-    return data?.data;
+    const { data: response } = await api.get(url, config);
+
+    return response?.data;
   } catch (error) {
     return null;
   }
@@ -52,22 +49,26 @@ async function createList(
   description: string,
   token: string
 ) {
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
-    },
-    body: JSON.stringify({
+  try {
+    const url = "/list";
+    const body = {
       userId,
       title,
       category,
       description,
-    }),
-  };
+    };
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
-  const result = await fetch(`${BACKEND_URL}/v1/list/`, requestOptions);
-  return await result.json();
+    const { data: response } = await api.post(url, body, config);
+
+    return response?.data;
+  } catch (error) {
+    return null;
+  }
 }
 
 async function updateList(
@@ -75,26 +76,23 @@ async function updateList(
   title: string,
   category: string,
   description: string,
-  token: string
+  token: string | undefined
 ) {
-  const requestOptions = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
-    },
-    body: JSON.stringify({
-      title,
-      category,
-      description,
-    }),
-  };
+  try {
+    const url = `/list/${listId}`;
+    const body = { title, category, description };
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
-  const result = await fetch(
-    `${BACKEND_URL}/v1/list/${listId}`,
-    requestOptions
-  );
-  return await result.json();
+    const { data } = await api.put(url, body, config);
+
+    return data;
+  } catch (error) {
+    return null;
+  }
 }
 
 export const listService = {

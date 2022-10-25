@@ -5,7 +5,7 @@ import "./styles.scss";
 import { Button } from "../../components/AuthForm/Button";
 import { Input } from "../../components/AuthForm/Input";
 import { useAuth } from "../../hooks/useAuth";
-import { ROUTES } from "../../routes/constants";
+import { ROUTES } from "../../routes/routes";
 
 export function Login() {
   const navigate = useNavigate();
