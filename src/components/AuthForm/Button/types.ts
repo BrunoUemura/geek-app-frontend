@@ -1,3 +1,3 @@
-export interface IButtonProps {
+export interface ButtonProps {
   label: string;
 }

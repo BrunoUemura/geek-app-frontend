@@ -6,8 +6,9 @@ import { IListItem } from "../../types/ILists";
 import { Modal } from "../Modal";
 import { LabelText } from "../UI/LabelText";
 import "./styles.scss";
+import { ItemCardProps } from "./types";
 
-export function ItemCard(item: IListItem) {
+export function ItemCard({ item }: ItemCardProps) {
   const navigate = useNavigate();
   const { token, isAuthenticated, logout } = useAuth();
 

@@ -1,7 +1,7 @@
 import "./styles.scss";
-import { IButtonProps } from "./types";
+import { ButtonProps } from "./types";
 
-export function Button({ label }: IButtonProps) {
+export function Button({ label }: ButtonProps) {
   return (
     <button className="form__button" type="submit">
       {label}

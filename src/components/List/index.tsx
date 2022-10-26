@@ -6,7 +6,7 @@ export function List({ lists }: ListProps) {
   return (
     <div className="list-component">
       {lists?.map((list) => {
-        return <ListCard key={list.id} {...list} />;
+        return <ListCard key={list.id} list={list} />;
       })}
     </div>
   );

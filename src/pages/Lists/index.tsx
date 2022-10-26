@@ -35,10 +35,14 @@ export function Lists() {
     })();
   }, [isAuthenticated]);
 
+  const handleNewListEvent = () => {
+    console.log("New List Event clicked");
+  };
+
   return (
     <div className="list-container">
       <Link className="list-container__new-btn" to={ROUTES.LIST_NEW}>
-        <Button label="New List" />
+        <Button label="New List" onClick={handleNewListEvent} />
       </Link>
 
       <List lists={lists} />

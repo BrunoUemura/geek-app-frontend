@@ -1,7 +1,7 @@
 import "./styles.scss";
-import { IInputProps } from "./types";
+import { InputProps } from "./types";
 
-export function Input({ label, type, setInputValue }: IInputProps) {
+export function Input({ label, type, setInputValue }: InputProps) {
   return (
     <div className="form__input">
       <label className="form__input_label">{label}</label>
