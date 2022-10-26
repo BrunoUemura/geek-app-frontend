@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Items } from "../../../components/Items";
-import { ListDetails } from "../../../components/ListDetails";
+import { ListHeader } from "../../../components/ListHeader";
 import { Button } from "../../../components/UI/Button";
 import { useAuth } from "../../../hooks/useAuth";
 
@@ -54,7 +54,7 @@ export function ListsDetails() {
 
   return (
     <div className={baseClass}>
-      <ListDetails list={list} />
+      <ListHeader list={list} />
 
       <Button label="Add Item" onClick={handleAddEvent} />
 

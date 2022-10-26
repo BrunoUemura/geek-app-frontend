@@ -28,7 +28,7 @@ export function ItemCard(item: IListItem) {
   const classDetailsInfoExpanded = `${classDetails}__info_expanded`;
   const classActions = `${baseClass}__actions`;
 
-  const itemEditFields = [
+  const editFields = [
     {
       label: "Title",
       inputType: "text",
@@ -88,7 +88,7 @@ export function ItemCard(item: IListItem) {
       <Modal
         modalTitle="Edit Item"
         onClose={handleCancelEdit}
-        fields={itemEditFields}
+        fields={editFields}
         onSave={handleSaveEvent}
       />
     );

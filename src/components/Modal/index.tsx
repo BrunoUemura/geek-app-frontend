@@ -1,30 +1,7 @@
-import { ChangeEvent, SetStateAction, useState } from "react";
+import { useState } from "react";
 import ReactModal from "react-modal";
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
-
-export interface ModalProps {
-  modalTitle: string;
-  fields: ModalFields[];
-  onClose: () => void;
-  onSave: () => Promise<void>;
-}
-
-interface ModalFields {
-  label: string;
-  inputType: string;
-  inputValue: string | number;
-  setState: (value: SetStateAction<any>) => void;
-}
+import { ModalProps } from "./types";
+import { customStyles } from "./utils";
 
 export function Modal({ modalTitle, fields, onClose, onSave }: ModalProps) {
   const [modalIsOpen, setIsOpen] = useState(true);
@@ -57,11 +34,18 @@ export function Modal({ modalTitle, fields, onClose, onSave }: ModalProps) {
           {fields?.map((field, index) => (
             <div key={index}>
               <label>{field.label}:&nbsp;</label>
-              <input
-                type={field.inputType}
-                value={field.inputValue}
-                onChange={(event) => field.setState(event.target.value)}
-              />
+              {field?.fieldType === "textarea" ? (
+                <textarea
+                  defaultValue={field.inputValue}
+                  onChange={(event) => field.setState(event.target.value)}
+                ></textarea>
+              ) : (
+                <input
+                  type={field.inputType}
+                  value={field.inputValue}
+                  onChange={(event) => field.setState(event.target.value)}
+                />
+              )}
             </div>
           ))}
         </div>

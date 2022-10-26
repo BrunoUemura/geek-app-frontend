@@ -1,5 +1,5 @@
 import { ILists } from "../../types/ILists";
 
-export type ListDetailsProps = {
+export type ListHeaderProps = {
   list: ILists;
 };
