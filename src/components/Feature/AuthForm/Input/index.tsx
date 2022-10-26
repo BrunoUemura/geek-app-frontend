@@ -1,5 +1,5 @@
-import "./styles.scss";
 import { InputProps } from "./types";
+import "./styles.scss";
 
 export function Input({ label, type, setInputValue }: InputProps) {
   return (

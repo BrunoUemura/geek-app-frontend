@@ -1,12 +1,12 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
-import { ROUTES } from "../../routes/routes";
-import { IListItem } from "../../types/ILists";
-import { Modal } from "../Modal";
-import { LabelText } from "../UI/LabelText";
-import "./styles.scss";
+
+import { useAuth } from "../../../hooks/useAuth";
+import { ROUTES } from "../../../routes/routes";
+import { Modal } from "../../UI/Modal";
+import { LabelText } from "../../UI/LabelText";
 import { ItemCardProps } from "./types";
+import "./styles.scss";
 
 export function ItemCard({ item }: ItemCardProps) {
   const navigate = useNavigate();
@@ -84,16 +84,16 @@ export function ItemCard({ item }: ItemCardProps) {
     console.log(newImage);
   };
 
-  if (editMode) {
-    return (
-      <Modal
-        modalTitle="Edit Item"
-        onClose={handleCancelEdit}
-        fields={editFields}
-        onSave={handleSaveEvent}
-      />
-    );
-  }
+  // if (editMode) {
+  //   return (
+  //     <Modal
+  //       modalTitle="Edit Item"
+  //       onClose={handleCancelEdit}
+  //       fields={editFields}
+  //       onSave={handleSaveEvent}
+  //     />
+  //   );
+  // }
 
   return (
     <div className={baseClass}>
@@ -121,10 +121,19 @@ export function ItemCard({ item }: ItemCardProps) {
         </div>
       </div>
 
-      <div className={classActions}>
-        <button onClick={() => setEditMode(true)}>edit</button>
-        <button>remove</button>
-      </div>
+      {editMode ? (
+        <Modal
+          modalTitle="Edit Item"
+          onClose={handleCancelEdit}
+          fields={editFields}
+          onSave={handleSaveEvent}
+        />
+      ) : (
+        <div className={classActions}>
+          <button onClick={() => setEditMode(true)}>edit</button>
+          <button>remove</button>
+        </div>
+      )}
     </div>
   );
 }

@@ -4,8 +4,6 @@ import { ROUTES } from "./routes";
 import { NotFound } from "../pages/404";
 import { Lists } from "../pages/Lists";
 import { ListsDetails } from "../pages/Lists/Details";
-import { ListEdit } from "../pages/Lists/Edit";
-import { ListNew } from "../pages/Lists/New";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 
@@ -19,8 +17,6 @@ export default function AppRoutes() {
       <Route path={ROUTES.ROOT} element={<Lists />} />
       <Route path={ROUTES.LIST} element={<Lists />} />
       <Route path={ROUTES.LIST_DETAILS} element={<ListsDetails />} />
-      <Route path={ROUTES.LIST_EDIT} element={<ListEdit />} />
-      <Route path={ROUTES.LIST_NEW} element={<ListNew />} />
     </Routes>
   );
 }

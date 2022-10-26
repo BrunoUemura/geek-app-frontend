@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ReactModal from "react-modal";
+
 import { ModalProps } from "./types";
 import { customStyles } from "./utils";
 

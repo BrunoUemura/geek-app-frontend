@@ -1,12 +1,13 @@
-import { ListHeaderProps } from "./types";
-import { ROUTES } from "../../routes/routes";
 import { useEffect, useState } from "react";
-import { listService } from "../../services/listService";
-import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { LabelText } from "../UI/LabelText";
-import { Modal } from "../Modal";
-import { formatDate } from "../../utils/functions";
+
+import { ListHeaderProps } from "./types";
+import { ROUTES } from "../../../routes/routes";
+import { listService } from "../../../services/listService";
+import { useAuth } from "../../../hooks/useAuth";
+import { LabelText } from "../../UI/LabelText";
+import { Modal } from "../../UI/Modal";
+import { formatDate } from "../../../utils/functions";
 import "./styles.scss";
 
 export function ListHeader({ list }: ListHeaderProps) {
@@ -76,16 +77,16 @@ export function ListHeader({ list }: ListHeaderProps) {
 
   const handleCancelEdit = () => setEditMode(false);
 
-  if (editMode) {
-    return (
-      <Modal
-        modalTitle="Edit List Details"
-        onClose={handleCancelEdit}
-        fields={editFields}
-        onSave={handleSaveEvent}
-      />
-    );
-  }
+  // if (editMode) {
+  //   return (
+  //     <Modal
+  //       modalTitle="Edit List Details"
+  //       onClose={handleCancelEdit}
+  //       fields={editFields}
+  //       onSave={handleSaveEvent}
+  //     />
+  //   );
+  // }
 
   return (
     <div className={baseClass}>
@@ -98,10 +99,19 @@ export function ListHeader({ list }: ListHeaderProps) {
         <LabelText label="Updated At" text={formatDate(updatedAt)} />
       </div>
 
-      <div className={classActions}>
-        <button onClick={() => setEditMode(true)}>edit</button>
-        <button>remove</button>
-      </div>
+      {editMode ? (
+        <Modal
+          modalTitle="Edit List Details"
+          onClose={handleCancelEdit}
+          fields={editFields}
+          onSave={handleSaveEvent}
+        />
+      ) : (
+        <div className={classActions}>
+          <button onClick={() => setEditMode(true)}>edit</button>
+          <button>remove</button>
+        </div>
+      )}
     </div>
   );
 }

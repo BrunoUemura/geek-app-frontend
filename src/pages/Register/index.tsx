@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import "./styles.scss";
-import { Button } from "../../components/AuthForm/Button";
-import { Input } from "../../components/AuthForm/Input";
+import { Button } from "../../components/Feature/AuthForm/Button";
+import { Input } from "../../components/Feature/AuthForm/Input";
 import { useAuth } from "../../hooks/useAuth";
 import { ROUTES } from "../../routes/routes";
 import { registerService } from "../../services/authService";
+import "./styles.scss";
 
 export function Register() {
   const navigate = useNavigate();

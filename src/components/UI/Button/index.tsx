@@ -1,5 +1,5 @@
-import "./styles.scss";
 import { ButtonProps } from "./types";
+import "./styles.scss";
 
 export function Button({ label, onClick }: ButtonProps) {
   return (

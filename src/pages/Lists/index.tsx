@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { List } from "../../components/List";
+import { List } from "../../components/Feature/List";
 import { ILists } from "../../types/ILists";
 import { listService } from "../../services/listService";
 import { useAuth } from "../../hooks/useAuth";
 import { ROUTES } from "../../routes/routes";
 import { Button } from "../../components/UI/Button";
-
 import "./styles.scss";
 
 export function Lists() {

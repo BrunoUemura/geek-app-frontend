@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Items } from "../../../components/Items";
-import { ListHeader } from "../../../components/ListHeader";
+
+import { Items } from "../../../components/Feature/Items";
+import { ListHeader } from "../../../components/Feature/ListHeader";
 import { Button } from "../../../components/UI/Button";
 import { useAuth } from "../../../hooks/useAuth";
-
 import { ROUTES } from "../../../routes/routes";
 import { listService } from "../../../services/listService";
 import { ILists } from "../../../types/ILists";
-
 import "./styles.scss";
 
 const listInitialState = {

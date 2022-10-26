@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { ROUTES } from "../../routes/routes";
-import { ILists } from "../../types/ILists";
-import "./styles.scss";
+import { ROUTES } from "../../../routes/routes";
 import { ListCardProps } from "./types";
+import "./styles.scss";
 
 export function ListCard({ list }: ListCardProps) {
   const redirectTo = `${ROUTES.LIST}/${list.id}`;
