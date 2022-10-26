@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { listService } from "../../../services/listService";
 import { useAuth } from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { LabelText } from "../../UI/LabelText";
 
 export function ListHeader({
   id,
@@ -129,43 +130,11 @@ export function ListHeader({
     <div className={baseClass}>
       <div className={classDetails}>
         <div className={`${classDetails}__title`}>{title}</div>
-
-        <div className={`${classDetailsElements}__label`}>
-          <span className={`${classDetailsElements}__label`}>
-            Category:&nbsp;
-          </span>
-          <span className={`${classDetailsElements}__text`}>{category}</span>
-        </div>
-
-        <div className={`${classDetailsElements}__label`}>
-          <span className={`${classDetailsElements}__label`}>
-            Description:&nbsp;
-          </span>
-          <span className={`${classDetailsElements}__text`}>{description}</span>
-        </div>
-
-        <div className={`${classDetailsElements}__label`}>
-          <span className={`${classDetailsElements}__label`}>
-            Total Items:&nbsp;
-          </span>
-          <span className={`${classDetailsElements}__text`}>
-            {itemsQuantity}
-          </span>
-        </div>
-
-        <div className={`${classDetailsElements}__label`}>
-          <span className={`${classDetailsElements}__label`}>
-            Created At:&nbsp;
-          </span>
-          <span className={`${classDetailsElements}__text`}>{createdAt}</span>
-        </div>
-
-        <div className={`${classDetailsElements}__label`}>
-          <span className={`${classDetailsElements}__label`}>
-            Updated At:&nbsp;
-          </span>
-          <span className={`${classDetailsElements}__text`}>{updatedAt}</span>
-        </div>
+        <LabelText label="Category" text={category} />
+        <LabelText label="Description" text={description} />
+        <LabelText label="Total Items" text={String(itemsQuantity)} />
+        <LabelText label="Created At" text={createdAt} />
+        <LabelText label="Updated At" text={updatedAt} />
       </div>
 
       <div className={classActions}>

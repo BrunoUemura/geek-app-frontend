@@ -1,6 +1,4 @@
-import React from "react";
 import { ListHeader } from "./Header";
-import { ListItems } from "./Items";
 import { ListDetailsProps } from "./types";
 
 export function ListDetails({ list }: ListDetailsProps) {
@@ -15,10 +13,6 @@ export function ListDetails({ list }: ListDetailsProps) {
         createdAt={list.createdAt.toString()}
         updatedAt={list.updatedAt.toString()}
       />
-
-      {list?.listItem?.map((item) => (
-        <ListItems key={item.id} items={item} />
-      ))}
     </div>
   );
 }

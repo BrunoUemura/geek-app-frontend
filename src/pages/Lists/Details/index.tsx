@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Items } from "../../../components/Items";
 import { ListDetails } from "../../../components/ListDetails";
+import { Button } from "../../../components/UI/Button";
 import { useAuth } from "../../../hooks/useAuth";
 
 import { ROUTES } from "../../../routes/routes";
 import { listService } from "../../../services/listService";
 import { ILists } from "../../../types/ILists";
+
+import "./styles.scss";
 
 const listInitialState = {
   id: "",
@@ -24,7 +28,11 @@ export function ListsDetails() {
 
   const [list, setList] = useState<ILists | null>(listInitialState);
 
-  const redirectTo = `${ROUTES.LIST}/${id}/edit`;
+  const baseClass = "list-details-container";
+
+  const handleAddEvent = () => {
+    console.log("Add button clicked");
+  };
 
   useEffect(() => {
     (async () => {
@@ -45,12 +53,12 @@ export function ListsDetails() {
   }
 
   return (
-    <div>
+    <div className={baseClass}>
       <ListDetails list={list} />
 
-      <Link to={redirectTo}>
-        <button>Edit</button>
-      </Link>
+      <Button label="Add Item" onClick={handleAddEvent} />
+
+      <Items items={list.listItem} />
     </div>
   );
 }
