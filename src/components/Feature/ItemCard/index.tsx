@@ -7,8 +7,9 @@ import { Modal } from "../../UI/Modal";
 import { LabelText } from "../../UI/LabelText";
 import { ItemCardProps } from "./types";
 import "./styles.scss";
+import { listItemService } from "../../../services/listService";
 
-export function ItemCard({ item }: ItemCardProps) {
+export function ItemCard({ listId, item }: ItemCardProps) {
   const navigate = useNavigate();
   const { token, isAuthenticated, logout } = useAuth();
 
@@ -75,25 +76,32 @@ export function ItemCard({ item }: ItemCardProps) {
   }, [isAuthenticated]);
 
   const handleCancelEdit = () => setEditMode(false);
+
   const handleSaveEvent = async () => {
-    console.log(newTitle);
-    console.log(newSeason);
-    console.log(newEpisode);
-    console.log(newChapter);
-    console.log(newLink);
-    console.log(newImage);
+    const response = await listItemService.updateListItem(
+      item.id,
+      listId,
+      newTitle,
+      newSeason,
+      newEpisode,
+      newChapter,
+      newLink,
+      newImage,
+      token || ""
+    );
+
+    if (!response) {
+      logout();
+    }
   };
 
-  // if (editMode) {
-  //   return (
-  //     <Modal
-  //       modalTitle="Edit Item"
-  //       onClose={handleCancelEdit}
-  //       fields={editFields}
-  //       onSave={handleSaveEvent}
-  //     />
-  //   );
-  // }
+  const handleDeleteEvent = async () => {
+    const response = await listItemService.deleteListItemById(item.id, token);
+
+    if (!response) {
+      logout();
+    }
+  };
 
   return (
     <div className={baseClass}>
@@ -131,7 +139,7 @@ export function ItemCard({ item }: ItemCardProps) {
       ) : (
         <div className={classActions}>
           <button onClick={() => setEditMode(true)}>edit</button>
-          <button>remove</button>
+          <button onClick={handleDeleteEvent}>remove</button>
         </div>
       )}
     </div>

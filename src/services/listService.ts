@@ -1,6 +1,5 @@
 import { api } from "./api";
 import { ILists } from "../types/ILists";
-import { AxiosError } from "axios";
 
 async function fetchListByListId(
   listId: string,
@@ -43,11 +42,11 @@ async function fetchListByUserId(
 }
 
 async function createList(
-  userId: string,
+  userId: string = "",
   title: string,
   category: string,
   description: string,
-  token: string
+  token: string = ""
 ) {
   try {
     const url = "/list";
@@ -63,9 +62,9 @@ async function createList(
       },
     };
 
-    const { data: response } = await api.post(url, body, config);
+    const { data } = await api.post(url, body, config);
 
-    return response?.data;
+    return data;
   } catch (error) {
     return null;
   }
@@ -95,9 +94,106 @@ async function updateList(
   }
 }
 
+async function createListItem(
+  listId: string,
+  title: string,
+  season: number,
+  episode: number,
+  chapter: number,
+  link: string,
+  image: string,
+  token: string
+) {
+  try {
+    const url = "/list-item";
+    const body = {
+      listId,
+      title,
+      season,
+      episode,
+      chapter,
+      link,
+      image,
+    };
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await api.post(url, body, config);
+
+    return data;
+  } catch (error) {
+    return null;
+  }
+}
+
+async function updateListItem(
+  itemId: string,
+  listId: string,
+  title: string,
+  season: number,
+  episode: number,
+  chapter: number,
+  link: string,
+  image: string,
+  token: string
+) {
+  try {
+    const url = `/list-item/${itemId}`;
+    const body = {
+      listId,
+      title,
+      season,
+      episode,
+      chapter,
+      link,
+      image,
+    };
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await api.put(url, body, config);
+
+    return data;
+  } catch (error) {
+    return null;
+  }
+}
+
+async function deleteListItemById(
+  itemId: string = "",
+  token: string = ""
+): Promise<ILists[] | null> {
+  try {
+    const url = `/list-item/${itemId}`;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await api.delete(url, config);
+
+    return data;
+  } catch (error) {
+    return null;
+  }
+}
+
 export const listService = {
   fetchListByListId,
   fetchListByUserId,
   createList,
   updateList,
+};
+
+export const listItemService = {
+  createListItem,
+  updateListItem,
+  deleteListItemById,
 };

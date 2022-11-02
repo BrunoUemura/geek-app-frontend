@@ -77,17 +77,6 @@ export function ListHeader({ list }: ListHeaderProps) {
 
   const handleCancelEdit = () => setEditMode(false);
 
-  // if (editMode) {
-  //   return (
-  //     <Modal
-  //       modalTitle="Edit List Details"
-  //       onClose={handleCancelEdit}
-  //       fields={editFields}
-  //       onSave={handleSaveEvent}
-  //     />
-  //   );
-  // }
-
   return (
     <div className={baseClass}>
       <div className={classDetails}>
@@ -99,19 +88,19 @@ export function ListHeader({ list }: ListHeaderProps) {
         <LabelText label="Updated At" text={formatDate(updatedAt)} />
       </div>
 
-      {editMode ? (
+      {editMode && (
         <Modal
           modalTitle="Edit List Details"
           onClose={handleCancelEdit}
           fields={editFields}
           onSave={handleSaveEvent}
         />
-      ) : (
-        <div className={classActions}>
-          <button onClick={() => setEditMode(true)}>edit</button>
-          <button>remove</button>
-        </div>
       )}
+
+      <div className={classActions}>
+        <button onClick={() => setEditMode(true)}>edit</button>
+        <button>remove</button>
+      </div>
     </div>
   );
 }
