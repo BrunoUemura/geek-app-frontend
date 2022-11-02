@@ -2,7 +2,10 @@ import { SetStateAction } from "react";
 
 export interface ModalProps {
   modalTitle: string;
-  fields: ModalFields[];
+  subtitle?: string;
+  fields?: ModalFields[];
+  cancelLabel: string;
+  confirmLabel: string;
   onClose: () => void;
   onSave: () => Promise<void>;
 }

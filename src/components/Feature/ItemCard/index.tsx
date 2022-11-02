@@ -132,8 +132,10 @@ export function ItemCard({ listId, item }: ItemCardProps) {
       {editMode ? (
         <Modal
           modalTitle="Edit Item"
-          onClose={handleCancelEdit}
           fields={editFields}
+          cancelLabel="Cancel"
+          confirmLabel="Save"
+          onClose={handleCancelEdit}
           onSave={handleSaveEvent}
         />
       ) : (

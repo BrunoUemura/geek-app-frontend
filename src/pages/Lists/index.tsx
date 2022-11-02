@@ -89,6 +89,8 @@ export function Lists() {
         <Modal
           modalTitle="New List"
           fields={modalProps}
+          cancelLabel="Cancel"
+          confirmLabel="Save"
           onClose={handleCancelNewList}
           onSave={handleSaveEvent}
         />

@@ -4,7 +4,15 @@ import ReactModal from "react-modal";
 import { ModalProps } from "./types";
 import { customStyles } from "./utils";
 
-export function Modal({ modalTitle, fields, onClose, onSave }: ModalProps) {
+export function Modal({
+  modalTitle,
+  subtitle,
+  fields,
+  cancelLabel,
+  confirmLabel,
+  onClose,
+  onSave,
+}: ModalProps) {
   const [modalIsOpen, setIsOpen] = useState(true);
 
   const baseClass = "modal-container";
@@ -30,6 +38,7 @@ export function Modal({ modalTitle, fields, onClose, onSave }: ModalProps) {
         ariaHideApp={false}
       >
         <h2>{modalTitle}</h2>
+        {subtitle && <h3>{subtitle}</h3>}
 
         <div className={classFields}>
           {fields?.map((field, index) => (
@@ -51,8 +60,8 @@ export function Modal({ modalTitle, fields, onClose, onSave }: ModalProps) {
           ))}
         </div>
 
-        <button onClick={closeModal}>close</button>
-        <button onClick={handleSaveEvent}>save</button>
+        <button onClick={closeModal}>{cancelLabel}</button>
+        <button onClick={handleSaveEvent}>{confirmLabel}</button>
       </ReactModal>
     </div>
   );

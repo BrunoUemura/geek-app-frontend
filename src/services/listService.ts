@@ -94,6 +94,26 @@ async function updateList(
   }
 }
 
+async function deleteList(
+  listId: string = "",
+  token: string = ""
+): Promise<ILists | null> {
+  try {
+    const url = `/list/${listId}`;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await api.delete(url, config);
+
+    return data;
+  } catch (error) {
+    return null;
+  }
+}
+
 async function createListItem(
   listId: string,
   title: string,
@@ -190,6 +210,7 @@ export const listService = {
   fetchListByUserId,
   createList,
   updateList,
+  deleteList,
 };
 
 export const listItemService = {

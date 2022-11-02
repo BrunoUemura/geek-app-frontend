@@ -18,6 +18,7 @@ export function ListHeader({ list }: ListHeaderProps) {
   const { token, isAuthenticated, logout } = useAuth();
 
   const [editMode, setEditMode] = useState<boolean>(false);
+  const [removeMode, setRemoveMode] = useState<boolean>(false);
   const [newTitle, setNewTitle] = useState<string>(title);
   const [newCategory, setNewCategory] = useState<string>(category);
   const [newDescription, setNewDescription] = useState<string>(description);
@@ -61,6 +62,7 @@ export function ListHeader({ list }: ListHeaderProps) {
     setNewDescription(description);
   }, [title, category, description]);
 
+  const handleCancelEdit = () => setEditMode(false);
   const handleSaveEvent = async () => {
     const response = await listService.updateList(
       id,
@@ -75,7 +77,14 @@ export function ListHeader({ list }: ListHeaderProps) {
     }
   };
 
-  const handleCancelEdit = () => setEditMode(false);
+  const handleCancelRemove = () => setRemoveMode(false);
+  const handleRemoveEvent = async () => {
+    const response = await listService.deleteList(id, token);
+
+    if (!response) {
+      logout();
+    }
+  };
 
   return (
     <div className={baseClass}>
@@ -91,15 +100,28 @@ export function ListHeader({ list }: ListHeaderProps) {
       {editMode && (
         <Modal
           modalTitle="Edit List Details"
-          onClose={handleCancelEdit}
           fields={editFields}
+          cancelLabel="Cancel"
+          confirmLabel="Save"
+          onClose={handleCancelEdit}
           onSave={handleSaveEvent}
+        />
+      )}
+
+      {removeMode && (
+        <Modal
+          modalTitle="Remove List"
+          subtitle="Are you sure you want to remove this List?"
+          cancelLabel="Cancel"
+          confirmLabel="Remove"
+          onClose={handleCancelRemove}
+          onSave={handleRemoveEvent}
         />
       )}
 
       <div className={classActions}>
         <button onClick={() => setEditMode(true)}>edit</button>
-        <button>remove</button>
+        <button onClick={() => setRemoveMode(true)}>remove</button>
       </div>
     </div>
   );
