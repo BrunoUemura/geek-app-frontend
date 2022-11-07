@@ -14,6 +14,7 @@ export function ItemCard({ listId, item }: ItemCardProps) {
   const { token, isAuthenticated, logout } = useAuth();
 
   const [editMode, setEditMode] = useState<boolean>(false);
+  const [removeMode, setRemoveMode] = useState<boolean>(false);
   const [expandMode, setExpandMode] = useState<boolean>(true);
 
   const [newTitle, setNewTitle] = useState<string>(item.title);
@@ -95,7 +96,8 @@ export function ItemCard({ listId, item }: ItemCardProps) {
     }
   };
 
-  const handleDeleteEvent = async () => {
+  const handleCancelRemove = () => setRemoveMode(false);
+  const handleRemoveEvent = async () => {
     const response = await listItemService.deleteListItemById(item.id, token);
 
     if (!response) {
@@ -129,7 +131,7 @@ export function ItemCard({ listId, item }: ItemCardProps) {
         </div>
       </div>
 
-      {editMode ? (
+      {editMode && (
         <Modal
           modalTitle="Edit Item"
           fields={editFields}
@@ -138,12 +140,23 @@ export function ItemCard({ listId, item }: ItemCardProps) {
           onClose={handleCancelEdit}
           onSave={handleSaveEvent}
         />
-      ) : (
-        <div className={classActions}>
-          <button onClick={() => setEditMode(true)}>edit</button>
-          <button onClick={handleDeleteEvent}>remove</button>
-        </div>
       )}
+
+      {removeMode && (
+        <Modal
+          modalTitle="Remove Item"
+          subtitle="Are you sure you want to remove this Item from the list?"
+          cancelLabel="Cancel"
+          confirmLabel="Remove"
+          onClose={handleCancelRemove}
+          onSave={handleRemoveEvent}
+        />
+      )}
+
+      <div className={classActions}>
+        <button onClick={() => setEditMode(true)}>edit</button>
+        <button onClick={() => setRemoveMode(true)}>remove</button>
+      </div>
     </div>
   );
 }

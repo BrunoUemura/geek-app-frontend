@@ -63,9 +63,6 @@ export function Lists() {
   };
 
   const handleSaveEvent = async () => {
-    console.log("Save clicked");
-    inputsCleanUp();
-
     const response = await listService.createList(
       id,
       title,
@@ -73,6 +70,8 @@ export function Lists() {
       description,
       token
     );
+
+    inputsCleanUp();
 
     if (!response) {
       logout();

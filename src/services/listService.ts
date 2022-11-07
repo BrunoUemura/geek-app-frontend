@@ -115,14 +115,14 @@ async function deleteList(
 }
 
 async function createListItem(
-  listId: string,
+  listId: string = "",
   title: string,
   season: number,
   episode: number,
   chapter: number,
   link: string,
   image: string,
-  token: string
+  token: string = ""
 ) {
   try {
     const url = "/list-item";
