@@ -26,7 +26,7 @@ async function fetchListByUserId(
   token: string = ""
 ): Promise<ILists[] | null> {
   try {
-    const url = `/list?user_id=${userId}`;
+    const url = `/list?userId=${userId}`;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -114,6 +114,14 @@ async function deleteList(
   }
 }
 
+export const listService = {
+  fetchListByListId,
+  fetchListByUserId,
+  createList,
+  updateList,
+  deleteList,
+};
+
 async function createListItem(
   listId: string = "",
   title: string,
@@ -125,9 +133,8 @@ async function createListItem(
   token: string = ""
 ) {
   try {
-    const url = "/list-item";
+    const url = `/list/${listId}/item`;
     const body = {
-      listId,
       title,
       season,
       episode,
@@ -161,9 +168,8 @@ async function updateListItem(
   token: string
 ) {
   try {
-    const url = `/list-item/${itemId}`;
+    const url = `/list/${listId}/item/${itemId}`;
     const body = {
-      listId,
       title,
       season,
       episode,
@@ -186,11 +192,12 @@ async function updateListItem(
 }
 
 async function deleteListItemById(
+  listId: string = "",
   itemId: string = "",
   token: string = ""
 ): Promise<ILists[] | null> {
   try {
-    const url = `/list-item/${itemId}`;
+    const url = `/list/${listId}/item/${itemId}`;
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -204,14 +211,6 @@ async function deleteListItemById(
     return null;
   }
 }
-
-export const listService = {
-  fetchListByListId,
-  fetchListByUserId,
-  createList,
-  updateList,
-  deleteList,
-};
 
 export const listItemService = {
   createListItem,

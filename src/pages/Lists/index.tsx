@@ -9,12 +9,14 @@ import { ROUTES } from "../../routes/routes";
 import { Button } from "../../components/UI/Button";
 import { Modal } from "../../components/UI/Modal";
 import "./styles.scss";
+import { LoaderSpinner } from "../../components/UI/Loader";
 
 export function Lists() {
   const navigate = useNavigate();
   const { isAuthenticated, id, token, logout } = useAuth();
 
   const [lists, setLists] = useState<ILists[] | null>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const [title, setTitle] = useState<string>("");
@@ -48,11 +50,13 @@ export function Lists() {
     (async () => {
       const response = await listService.fetchListByUserId(id, token);
 
-      setLists(response);
-
       if (!response) {
         logout();
+        return;
       }
+
+      setLists(response);
+      setIsLoading(!isLoading);
     })();
   }, [isAuthenticated]);
 
@@ -80,6 +84,8 @@ export function Lists() {
 
   const handleCancelNewList = () => setIsModalOpen(false);
 
+  console.log(lists);
+
   return (
     <div className="list-container">
       <Button label="New List" onClick={() => setIsModalOpen(true)} />
@@ -95,7 +101,13 @@ export function Lists() {
         />
       )}
 
-      <List lists={lists} />
+      {isLoading ? (
+        <div className="loading-container">
+          <LoaderSpinner />
+        </div>
+      ) : (
+        <List lists={lists} />
+      )}
     </div>
   );
 }

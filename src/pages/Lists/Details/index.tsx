@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Items } from "../../../components/Feature/Items";
 import { ListHeader } from "../../../components/Feature/ListHeader";
 import { Button } from "../../../components/UI/Button";
+import { LoaderSpinner } from "../../../components/UI/Loader";
 import { Modal } from "../../../components/UI/Modal";
 import { useAuth } from "../../../hooks/useAuth";
 import { ROUTES } from "../../../routes/routes";
@@ -27,6 +28,7 @@ export function ListsDetails() {
   const { id } = useParams();
   const { isAuthenticated, logout, token } = useAuth();
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [list, setList] = useState<ILists | null>(listInitialState);
 
@@ -114,11 +116,13 @@ export function ListsDetails() {
     (async () => {
       const result = await listService.fetchListByListId(id || "", token || "");
 
-      setList(result);
-
       if (!result) {
         logout();
+        return;
       }
+
+      setList(result);
+      setIsLoading(!isLoading);
     })();
   }, [isAuthenticated]);
 
@@ -150,7 +154,13 @@ export function ListsDetails() {
         />
       )}
 
-      <Items items={list.listItem} />
+      {isLoading ? (
+        <div className="loading-container">
+          <LoaderSpinner />
+        </div>
+      ) : (
+        <Items items={list.listItem} />
+      )}
     </div>
   );
 }

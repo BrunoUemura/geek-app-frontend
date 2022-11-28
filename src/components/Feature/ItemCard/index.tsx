@@ -98,7 +98,11 @@ export function ItemCard({ listId, item }: ItemCardProps) {
 
   const handleCancelRemove = () => setRemoveMode(false);
   const handleRemoveEvent = async () => {
-    const response = await listItemService.deleteListItemById(item.id, token);
+    const response = await listItemService.deleteListItemById(
+      listId,
+      item.id,
+      token
+    );
 
     if (!response) {
       logout();
