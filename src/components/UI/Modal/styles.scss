@@ -1,3 +1,9 @@
 .modal-container {
   position: absolute;
+  width: 500px;
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+  }
 }

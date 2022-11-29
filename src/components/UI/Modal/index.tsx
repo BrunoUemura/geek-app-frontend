@@ -42,7 +42,7 @@ export function Modal({
 
         <div className={classFields}>
           {fields?.map((field, index) => (
-            <div key={index}>
+            <div key={index} className="modal-container__inputs">
               <label>{field.label}:&nbsp;</label>
               {field?.fieldType === "textarea" ? (
                 <textarea

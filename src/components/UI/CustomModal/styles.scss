@@ -1,0 +1,17 @@
+.modal-container {
+  z-index: 999;
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+
+  padding: 30px;
+
+  transform: translate(-50%, -50%);
+
+  background-color: #fff;
+  backdrop-filter: blur(8px);
+}

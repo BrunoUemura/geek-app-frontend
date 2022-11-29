@@ -10,6 +10,7 @@ import { Button } from "../../components/UI/Button";
 import { Modal } from "../../components/UI/Modal";
 import "./styles.scss";
 import { LoaderSpinner } from "../../components/UI/Loader";
+import CustomModal from "../../components/UI/CustomModal";
 
 export function Lists() {
   const navigate = useNavigate();
@@ -84,10 +85,10 @@ export function Lists() {
 
   const handleCancelNewList = () => setIsModalOpen(false);
 
-  console.log(lists);
+  const baseClass = !isModalOpen ? "list-container" : "list-container__blur";
 
   return (
-    <div className="list-container">
+    <div className={baseClass}>
       <Button label="New List" onClick={() => setIsModalOpen(true)} />
 
       {isModalOpen && (
@@ -100,6 +101,17 @@ export function Lists() {
           onSave={handleSaveEvent}
         />
       )}
+
+      {/* {isModalOpen && (
+        <CustomModal
+          modalTitle="New List"
+          fields={modalProps}
+          cancelLabel="Cancel"
+          confirmLabel="Save"
+          onClose={handleCancelNewList}
+          onSave={handleSaveEvent}
+        />
+      )} */}
 
       {isLoading ? (
         <div className="loading-container">
