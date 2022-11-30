@@ -63,35 +63,45 @@ export function Modal({
         </div>
 
         <div className="w-full h-9 flex justify-between text-center">
-          <button
-            className="w-1/2 bg-black text-white hover:bg-red-900"
-            onClick={closeModal}
-          >
-            {cancelLabel}
-          </button>
-
           {isAwaitingSave ? (
-            <button
-              className="w-1/2 flex justify-center items-center text-white bg-blue-900"
-              disabled={true}
-              onClick={handleSaveEvent}
-            >
-              <LoaderSpinner
-                width={20}
-                height={20}
-                strokeWidth={8}
-                strokeWidthSecondary={8}
-                primaryColor={"#c7c7c7"}
-                secondaryColor={"#a3a3a3"}
-              />
-            </button>
+            <>
+              <button
+                className="w-1/2 flex justify-center items-center text-white bg-blue-900"
+                disabled={true}
+                onClick={handleSaveEvent}
+              >
+                <LoaderSpinner
+                  width={20}
+                  height={20}
+                  strokeWidth={8}
+                  strokeWidthSecondary={8}
+                  primaryColor={"#c7c7c7"}
+                  secondaryColor={"#a3a3a3"}
+                />
+              </button>
+              <button
+                className="w-1/2 bg-black text-white"
+                onClick={closeModal}
+                disabled={true}
+              >
+                {cancelLabel}
+              </button>
+            </>
           ) : (
-            <button
-              className="w-1/2 bg-gray-600 text-white hover:bg-blue-900"
-              onClick={handleSaveEvent}
-            >
-              {confirmLabel}
-            </button>
+            <>
+              <button
+                className="w-1/2 bg-gray-600 text-white hover:bg-blue-900"
+                onClick={handleSaveEvent}
+              >
+                {confirmLabel}
+              </button>
+              <button
+                className="w-1/2 bg-black text-white hover:bg-red-900"
+                onClick={closeModal}
+              >
+                {cancelLabel}
+              </button>
+            </>
           )}
         </div>
       </ReactModal>
