@@ -16,6 +16,7 @@ export function ListHeader({ list }: ListHeaderProps) {
   const navigate = useNavigate();
   const { token, isAuthenticated, logout } = useAuth();
 
+  const [isAwaitingSave, setIsAwaitingSave] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [removeMode, setRemoveMode] = useState<boolean>(false);
   const [newTitle, setNewTitle] = useState<string>(title);
@@ -58,6 +59,7 @@ export function ListHeader({ list }: ListHeaderProps) {
 
   const handleCancelEdit = () => setEditMode(false);
   const handleSaveEvent = async () => {
+    setIsAwaitingSave(true);
     const response = await listService.updateList(
       id,
       newTitle,
@@ -66,18 +68,27 @@ export function ListHeader({ list }: ListHeaderProps) {
       token
     );
 
+    setIsAwaitingSave(false);
+
     if (!response) {
       logout();
     }
+
+    navigate(0);
   };
 
   const handleCancelRemove = () => setRemoveMode(false);
   const handleRemoveEvent = async () => {
+    setIsAwaitingSave(true);
     const response = await listService.deleteList(id, token);
+
+    setIsAwaitingSave(false);
 
     if (!response) {
       logout();
     }
+
+    navigate(ROUTES.LIST, { replace: true });
   };
 
   return (
@@ -97,6 +108,7 @@ export function ListHeader({ list }: ListHeaderProps) {
           fields={editFields}
           cancelLabel="Cancel"
           confirmLabel="Save"
+          isAwaitingSave={isAwaitingSave}
           onClose={handleCancelEdit}
           onSave={handleSaveEvent}
         />
@@ -108,6 +120,7 @@ export function ListHeader({ list }: ListHeaderProps) {
           subtitle="Are you sure you want to remove this List?"
           cancelLabel="Cancel"
           confirmLabel="Remove"
+          isAwaitingSave={isAwaitingSave}
           onClose={handleCancelRemove}
           onSave={handleRemoveEvent}
         />

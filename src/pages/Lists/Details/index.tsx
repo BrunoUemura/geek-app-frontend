@@ -26,6 +26,7 @@ export function ListsDetails() {
   const { id } = useParams();
   const { isAuthenticated, logout, token } = useAuth();
 
+  const [isAwaitingSave, setIsAwaitingSave] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [list, setList] = useState<ILists | null>(listInitialState);
@@ -36,8 +37,6 @@ export function ListsDetails() {
   const [chapter, setChapter] = useState<number>(0);
   const [link, setLink] = useState<string>("");
   const [image, setImage] = useState<string>("");
-
-  const baseClass = "list-details-container";
 
   const modalProps = [
     {
@@ -88,6 +87,7 @@ export function ListsDetails() {
   };
 
   const handleAddEvent = async () => {
+    setIsAwaitingSave(true);
     const response = await listItemService.createListItem(
       list?.id,
       title,
@@ -99,11 +99,14 @@ export function ListsDetails() {
       token
     );
 
+    setIsAwaitingSave(false);
     inputsCleanUp();
 
     if (!response) {
       logout();
     }
+
+    navigate(0);
   };
 
   const handleCancelNewList = () => setIsModalOpen(false);
@@ -145,10 +148,11 @@ export function ListsDetails() {
 
       {isModalOpen && (
         <Modal
-          modalTitle="New List"
+          modalTitle="New Item"
           fields={modalProps}
           cancelLabel="Cancel"
           confirmLabel="Save"
+          isAwaitingSave={isAwaitingSave}
           onClose={handleCancelNewList}
           onSave={handleAddEvent}
         />

@@ -6,6 +6,7 @@ export interface ModalProps {
   fields?: ModalFields[];
   cancelLabel: string;
   confirmLabel: string;
+  isAwaitingSave?: boolean;
   onClose: () => void;
   onSave: () => Promise<void>;
 }

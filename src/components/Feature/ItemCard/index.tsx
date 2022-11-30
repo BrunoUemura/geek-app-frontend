@@ -13,6 +13,7 @@ export function ItemCard({ listId, item }: ItemCardProps) {
   const navigate = useNavigate();
   const { token, isAuthenticated, logout } = useAuth();
 
+  const [isAwaitingSave, setIsAwaitingSave] = useState<boolean>(false);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [removeMode, setRemoveMode] = useState<boolean>(false);
   const [expandMode, setExpandMode] = useState<boolean>(true);
@@ -71,6 +72,8 @@ export function ItemCard({ listId, item }: ItemCardProps) {
 
   const handleCancelEdit = () => setEditMode(false);
   const handleSaveEvent = async () => {
+    setIsAwaitingSave(true);
+
     const response = await listItemService.updateListItem(
       item.id,
       listId,
@@ -83,22 +86,31 @@ export function ItemCard({ listId, item }: ItemCardProps) {
       token || ""
     );
 
+    setIsAwaitingSave(false);
+
     if (!response) {
       logout();
     }
+
+    navigate(0);
   };
 
   const handleCancelRemove = () => setRemoveMode(false);
   const handleRemoveEvent = async () => {
+    setIsAwaitingSave(true);
     const response = await listItemService.deleteListItemById(
       listId,
       item.id,
       token
     );
 
+    setIsAwaitingSave(false);
+
     if (!response) {
       logout();
     }
+
+    navigate(0);
   };
 
   return (
@@ -143,6 +155,7 @@ export function ItemCard({ listId, item }: ItemCardProps) {
           fields={editFields}
           cancelLabel="Cancel"
           confirmLabel="Save"
+          isAwaitingSave={isAwaitingSave}
           onClose={handleCancelEdit}
           onSave={handleSaveEvent}
         />
@@ -154,6 +167,7 @@ export function ItemCard({ listId, item }: ItemCardProps) {
           subtitle="Are you sure you want to remove this Item from the list?"
           cancelLabel="Cancel"
           confirmLabel="Remove"
+          isAwaitingSave={isAwaitingSave}
           onClose={handleCancelRemove}
           onSave={handleRemoveEvent}
         />

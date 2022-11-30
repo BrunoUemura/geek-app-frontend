@@ -16,6 +16,7 @@ export function Lists() {
   const [lists, setLists] = useState<ILists[] | null>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isAwaitingSave, setIsAwaitingSave] = useState<boolean>(false);
 
   const [title, setTitle] = useState<string>("");
   const [category, setCategory] = useState<string>("");
@@ -65,6 +66,7 @@ export function Lists() {
   };
 
   const handleSaveEvent = async () => {
+    setIsAwaitingSave(true);
     const response = await listService.createList(
       id,
       title,
@@ -73,11 +75,14 @@ export function Lists() {
       token
     );
 
+    setIsAwaitingSave(false);
     inputsCleanUp();
 
     if (!response) {
       logout();
     }
+
+    navigate(0);
   };
 
   const handleCancelNewList = () => setIsModalOpen(false);
@@ -94,6 +99,7 @@ export function Lists() {
           fields={modalProps}
           cancelLabel="Cancel"
           confirmLabel="Save"
+          isAwaitingSave={isAwaitingSave}
           onClose={handleCancelNewList}
           onSave={handleSaveEvent}
         />

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ReactModal from "react-modal";
+import { LoaderSpinner } from "../Loader";
 
 import { ModalProps } from "./types";
 import { customStyles } from "./utils";
@@ -10,13 +11,11 @@ export function Modal({
   fields,
   cancelLabel,
   confirmLabel,
+  isAwaitingSave = false,
   onClose,
   onSave,
 }: ModalProps) {
   const [modalIsOpen, setIsOpen] = useState(true);
-
-  const baseClass = "modal-container";
-  const classFields = `${baseClass}__modal-fields`;
 
   const closeModal = () => {
     setIsOpen(false);
@@ -63,19 +62,37 @@ export function Modal({
           ))}
         </div>
 
-        <div className="w-full h-9 flex justify-between">
+        <div className="w-full h-9 flex justify-between text-center">
           <button
             className="w-1/2 bg-black text-white hover:bg-red-900"
             onClick={closeModal}
           >
             {cancelLabel}
           </button>
-          <button
-            className="w-1/2 bg-gray-600 text-white hover:bg-blue-900"
-            onClick={handleSaveEvent}
-          >
-            {confirmLabel}
-          </button>
+
+          {isAwaitingSave ? (
+            <button
+              className="w-1/2 flex justify-center items-center text-white bg-blue-900"
+              disabled={true}
+              onClick={handleSaveEvent}
+            >
+              <LoaderSpinner
+                width={20}
+                height={20}
+                strokeWidth={8}
+                strokeWidthSecondary={8}
+                primaryColor={"#c7c7c7"}
+                secondaryColor={"#a3a3a3"}
+              />
+            </button>
+          ) : (
+            <button
+              className="w-1/2 bg-gray-600 text-white hover:bg-blue-900"
+              onClick={handleSaveEvent}
+            >
+              {confirmLabel}
+            </button>
+          )}
         </div>
       </ReactModal>
     </div>
