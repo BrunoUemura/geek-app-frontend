@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { List } from "../../components/Feature/List";
 import { ILists } from "../../types/ILists";
 import { listService } from "../../services/listService";
 import { useAuth } from "../../hooks/useAuth";
 import { ROUTES } from "../../routes/routes";
 import { Button } from "../../components/UI/Button";
 import { Modal } from "../../components/UI/Modal";
-import "./styles.scss";
-import { LoaderSpinner } from "../../components/UI/Loader";
+import { RenderList } from "./RenderList";
 
 export function Lists() {
   const navigate = useNavigate();
@@ -84,11 +82,11 @@ export function Lists() {
 
   const handleCancelNewList = () => setIsModalOpen(false);
 
-  console.log(lists);
-
   return (
-    <div className="list-container">
-      <Button label="New List" onClick={() => setIsModalOpen(true)} />
+    <div className="w-screen h-screen p-10">
+      <div className="mb-8">
+        <Button label="New List" onClick={() => setIsModalOpen(true)} />
+      </div>
 
       {isModalOpen && (
         <Modal
@@ -101,13 +99,7 @@ export function Lists() {
         />
       )}
 
-      {isLoading ? (
-        <div className="loading-container">
-          <LoaderSpinner />
-        </div>
-      ) : (
-        <List lists={lists} />
-      )}
+      <RenderList isLoading={isLoading} lists={lists} />
     </div>
   );
 }

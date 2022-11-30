@@ -6,8 +6,8 @@ import { ROUTES } from "../../../routes/routes";
 import { Modal } from "../../UI/Modal";
 import { LabelText } from "../../UI/LabelText";
 import { ItemCardProps } from "./types";
-import "./styles.scss";
 import { listItemService } from "../../../services/listService";
+import noLogo from "../../../assets/nologo.png";
 
 export function ItemCard({ listId, item }: ItemCardProps) {
   const navigate = useNavigate();
@@ -23,13 +23,6 @@ export function ItemCard({ listId, item }: ItemCardProps) {
   const [newChapter, setNewChapter] = useState<number>(item.chapter || 0);
   const [newLink, setNewLink] = useState<string>(item.link);
   const [newImage, setNewImage] = useState<string>(item.image);
-
-  const baseClass = "item-card-component";
-  const classDetails = `${baseClass}__details`;
-  const classDetailsInfo = `${classDetails}__info`;
-  const classDetailsInfoCollapsed = `${classDetails}__info_collapsed`;
-  const classDetailsInfoExpanded = `${classDetails}__info_expanded`;
-  const classActions = `${baseClass}__actions`;
 
   const editFields = [
     {
@@ -77,7 +70,6 @@ export function ItemCard({ listId, item }: ItemCardProps) {
   }, [isAuthenticated]);
 
   const handleCancelEdit = () => setEditMode(false);
-
   const handleSaveEvent = async () => {
     const response = await listItemService.updateListItem(
       item.id,
@@ -110,11 +102,15 @@ export function ItemCard({ listId, item }: ItemCardProps) {
   };
 
   return (
-    <div className={baseClass}>
-      <div className={classDetails}>
-        <img src={item.image} alt={`${item.title} image`} />
+    <div className="h-52 flex flex-col justify-between border-b bg-white mb-6 sm:flex-row sm:mb-0 sm:h-36">
+      <div className="h-4/5 flex items-center mb-4 sm:h-full">
+        <img
+          className="h-full"
+          src={item.image || noLogo}
+          alt={`${item.title} image`}
+        />
 
-        <div className={classDetailsInfo}>
+        <div className="pl-5 text-sm sm:flex sm:flex-col sm:text-lg">
           <LabelText label="Title" text={item.title} />
 
           {expandMode && (
@@ -129,7 +125,13 @@ export function ItemCard({ listId, item }: ItemCardProps) {
                 <LabelText label="Chapter" text={String(item.chapter)} />
               ) : null}
 
-              <a href={item.link}>Direct Link</a>
+              <a
+                className="text-gray-700 hover:underline hover:text-black"
+                href={item.link}
+                target="_blank"
+              >
+                Direct Link
+              </a>
             </>
           )}
         </div>
@@ -157,9 +159,19 @@ export function ItemCard({ listId, item }: ItemCardProps) {
         />
       )}
 
-      <div className={classActions}>
-        <button onClick={() => setEditMode(true)}>edit</button>
-        <button onClick={() => setRemoveMode(true)}>remove</button>
+      <div className="h-1/5 flex items-center justify-between sm:flex-col sm:justify-evenly sm:mr-3 sm:h-full">
+        <button
+          className="w-1/2 bg-gray-500 text-white py-1 hover:bg-gray-400 sm:w-full sm:px-2"
+          onClick={() => setEditMode(true)}
+        >
+          Edit
+        </button>
+        <button
+          className="w-1/2 bg-gray-900 text-white py-1 hover:bg-gray-800 sm:w-full sm:px-2"
+          onClick={() => setRemoveMode(true)}
+        >
+          Remove
+        </button>
       </div>
     </div>
   );

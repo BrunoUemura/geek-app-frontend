@@ -4,6 +4,8 @@ import {
   loaderSecondaryColor,
   loaderStrokeWidth,
   loaderStrokeWidthSecondary,
+  loaderWidth,
+  loaderHeight,
 } from "../helpers";
 
 interface LoaderProps {
@@ -12,6 +14,8 @@ interface LoaderProps {
   visible?: boolean;
   strokeWidth?: number;
   strokeWidthSecondary?: number;
+  width?: number;
+  height?: number;
 }
 
 export function LoaderSpinner({
@@ -20,11 +24,13 @@ export function LoaderSpinner({
   visible,
   strokeWidth,
   strokeWidthSecondary,
+  width,
+  height,
 }: LoaderProps) {
   return (
     <Oval
-      height={80}
-      width={80}
+      width={width || loaderWidth}
+      height={height || loaderHeight}
       color={primaryColor || loaderPrimaryColor}
       secondaryColor={secondaryColor || loaderSecondaryColor}
       wrapperStyle={{}}

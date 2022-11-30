@@ -1,12 +1,11 @@
 import { ItemCard } from "../ItemCard";
 import { ItemsProps } from "./types";
-import "./styles.scss";
 
 export function Items({ items }: ItemsProps) {
   return (
-    <div className="items-component">
+    <div className="flex flex-col">
       {items?.map((item) => {
-        return <ItemCard key={item.id} listId={item.id} item={item} />;
+        return <ItemCard key={item.id} listId={item.listId} item={item} />;
       })}
     </div>
   );
