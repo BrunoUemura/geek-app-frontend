@@ -6,7 +6,6 @@ import { Input } from "../../components/Feature/AuthForm/Input";
 import { useAuth } from "../../hooks/useAuth";
 import { ROUTES } from "../../routes/routes";
 import { registerService } from "../../services/authService";
-import "./styles.scss";
 
 export function Register() {
   const navigate = useNavigate();
@@ -32,18 +31,26 @@ export function Register() {
   };
 
   return (
-    <div className="register">
-      <form onSubmit={handleSignUp} className="register__form">
-        <h1>Register</h1>
+    <div className="w-screen h-screen flex justify-center items-center">
+      <form
+        onSubmit={handleSignUp}
+        className="bg-white p-8 sm:w-4/5 md:w-4/5 lg:w-1/3"
+      >
+        <h1 className="font-medium uppercase text-2xl mb-8">Register</h1>
 
         <Input label="Name" type="text" setInputValue={setName} />
         <Input label="Email" type="text" setInputValue={setEmail} />
         <Input label="Password" type="password" setInputValue={setPassword} />
         <Button label="Login" />
 
-        <div className="register__redirect_link">
-          Already registered?{" "}
-          <Link to={ROUTES.LOGIN}> Click hete to sign in</Link>
+        <div className="flex mt-4">
+          <p className="text-gray-500">Already registered?&nbsp;</p>
+          <Link
+            className="text-gray-700 hover:text-gray-900 hover:underline"
+            to={ROUTES.LOGIN}
+          >
+            Click hete to sign in
+          </Link>
         </div>
       </form>
     </div>

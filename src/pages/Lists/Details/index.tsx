@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-import { Items } from "../../../components/Feature/Items";
 import { ListHeader } from "../../../components/Feature/ListHeader";
 import { Button } from "../../../components/UI/Button";
-import { LoaderSpinner } from "../../../components/UI/Loader";
 import { Modal } from "../../../components/UI/Modal";
 import { useAuth } from "../../../hooks/useAuth";
 import { ROUTES } from "../../../routes/routes";
 import { listItemService, listService } from "../../../services/listService";
 import { ILists } from "../../../types/ILists";
-import "./styles.scss";
+import { RenderItems } from "./RenderItems";
 
 const listInitialState = {
   id: "",
@@ -138,10 +136,12 @@ export function ListsDetails() {
   }
 
   return (
-    <div className={baseClass}>
+    <div className="w-screen h-screen p-10">
       <ListHeader list={list} />
 
-      <Button label="Add Item" onClick={() => setIsModalOpen(true)} />
+      <div className="mt-8 mb-4">
+        <Button label="Add Item" onClick={() => setIsModalOpen(true)} />
+      </div>
 
       {isModalOpen && (
         <Modal
@@ -154,13 +154,7 @@ export function ListsDetails() {
         />
       )}
 
-      {isLoading ? (
-        <div className="loading-container">
-          <LoaderSpinner />
-        </div>
-      ) : (
-        <Items items={list.listItem} />
-      )}
+      <RenderItems isLoading={isLoading} items={list.listItem} />
     </div>
   );
 }

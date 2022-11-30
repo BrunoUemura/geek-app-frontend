@@ -8,7 +8,6 @@ import { useAuth } from "../../../hooks/useAuth";
 import { LabelText } from "../../UI/LabelText";
 import { Modal } from "../../UI/Modal";
 import { formatDate } from "../../../utils/functions";
-import "./styles.scss";
 
 export function ListHeader({ list }: ListHeaderProps) {
   const { id, title, category, description, listItem, createdAt, updatedAt } =
@@ -22,11 +21,6 @@ export function ListHeader({ list }: ListHeaderProps) {
   const [newTitle, setNewTitle] = useState<string>(title);
   const [newCategory, setNewCategory] = useState<string>(category);
   const [newDescription, setNewDescription] = useState<string>(description);
-
-  const baseClass = "list-header-container";
-  const classDetails = `${baseClass}__details`;
-  const classDetailsElements = `${classDetails}__elements`;
-  const classActions = `${baseClass}__actions`;
 
   const editFields = [
     {
@@ -87,9 +81,9 @@ export function ListHeader({ list }: ListHeaderProps) {
   };
 
   return (
-    <div className={baseClass}>
-      <div className={classDetails}>
-        <div className={`${classDetails}__title`}>{title}</div>
+    <div className="flex flex-col justify-center bg-white sm:flex-row sm:justify-between">
+      <div className="flex flex-col p-3">
+        <div className="text-2xl mb-4 tracking-wide">{title}</div>
         <LabelText label="Category" text={category} />
         <LabelText label="Description" text={description} />
         <LabelText label="Total Items" text={String(listItem.length)} />
@@ -119,9 +113,19 @@ export function ListHeader({ list }: ListHeaderProps) {
         />
       )}
 
-      <div className={classActions}>
-        <button onClick={() => setEditMode(true)}>edit</button>
-        <button onClick={() => setRemoveMode(true)}>remove</button>
+      <div className="flex items-center justify-between sm:flex-col sm:justify-evenly sm:mr-3">
+        <button
+          className="w-1/2 bg-gray-500 text-white py-1 sm:w-full sm:px-2"
+          onClick={() => setEditMode(true)}
+        >
+          Edit
+        </button>
+        <button
+          className="w-1/2 bg-gray-900 text-white py-1 sm:w-full sm:px-2"
+          onClick={() => setRemoveMode(true)}
+        >
+          Remove
+        </button>
       </div>
     </div>
   );

@@ -1,12 +1,15 @@
 import { ListCard } from "../ListCard";
 import { ListProps } from "./types";
-import "./styles.scss";
 
 export function List({ lists }: ListProps) {
   return (
-    <div className="list-component">
+    <div className="flex flex-col mt-8">
       {lists?.map((list) => {
-        return <ListCard key={list.id} list={list} />;
+        return (
+          <div className="mb-3">
+            <ListCard key={list.id} list={list} />
+          </div>
+        );
       })}
     </div>
   );
