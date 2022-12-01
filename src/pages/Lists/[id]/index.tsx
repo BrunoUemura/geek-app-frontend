@@ -8,9 +8,9 @@ import { Button } from "../../../components/UI/Button";
 import { Modal } from "../../../components/UI/Modal";
 import { useAuth } from "../../../hooks/useAuth";
 import { ROUTES } from "../../../routes";
-import { listItemService, listService } from "../../../services/listService";
+import { listItemService } from "../../../services/listService";
 import { ILists } from "../../../types/ILists";
-import { RenderItems } from "./RenderItems";
+import { RenderItems } from "../../../components/Feature/Items/RenderItems";
 
 export const getServerSideProps: GetServerSideProps<{ list: ILists }> = async (
   context

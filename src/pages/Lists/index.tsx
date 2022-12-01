@@ -3,14 +3,12 @@ import { useEffect, useState } from "react";
 import { ILists } from "../../types/ILists";
 import { listService } from "../../services/listService";
 import { useAuth } from "../../hooks/useAuth";
-import { ROUTES } from "../../routes";
 import { Button } from "../../components/UI/Button";
 import { Modal } from "../../components/UI/Modal";
-import { RenderList } from "./RenderList";
-import Router from "next/router";
+import { RenderList } from "../../components/Feature/List/RenderList";
 
 export default function Lists() {
-  const { isAuthenticated, id, token, logout } = useAuth();
+  const { id, token, logout } = useAuth();
 
   const [lists, setLists] = useState<ILists[] | null>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);

@@ -1,6 +1,6 @@
-import { List } from "../../components/Feature/List";
-import { LoaderSpinner } from "../../components/UI/Loader";
-import { ILists } from "../../types/ILists";
+import { LoaderSpinner } from "../../UI/Loader";
+import { ILists } from "../../../types/ILists";
+import { List } from ".";
 
 interface RenderListProps {
   isLoading: boolean;

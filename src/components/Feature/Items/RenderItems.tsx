@@ -1,6 +1,6 @@
-import { Items } from "../../../components/Feature/Items";
-import { LoaderSpinner } from "../../../components/UI/Loader";
+import { LoaderSpinner } from "../../UI/Loader";
 import { IListItem } from "../../../types/ILists";
+import { Items } from ".";
 
 interface RenderItemsProps {
   isLoading: boolean;
