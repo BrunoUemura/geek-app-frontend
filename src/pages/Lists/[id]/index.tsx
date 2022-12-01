@@ -3,14 +3,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import { ListHeader } from "../../../components/Feature/ListHeader";
+import { ListHeader } from "../../../components/List/components/ListHeader";
 import { Button } from "../../../components/UI/Button";
 import { Modal } from "../../../components/UI/Modal";
 import { useAuth } from "../../../hooks/useAuth";
-import { ROUTES } from "../../../routes";
-import { listItemService } from "../../../services/listService";
-import { ILists } from "../../../types/ILists";
-import { RenderItems } from "../../../components/Feature/Items/RenderItems";
+import { ROUTES } from "../../../constants/routes";
+import { listItemService } from "../../../services/http/list";
+import { ILists } from "../../../@types/ILists";
+import { RenderItems } from "../../../components/Items/components/RenderItems";
 
 export const getServerSideProps: GetServerSideProps<{ list: ILists }> = async (
   context

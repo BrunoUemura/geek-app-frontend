@@ -1,7 +1,6 @@
 import Router from "next/router";
-import { useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { ROUTES } from "../routes";
+import { ROUTES } from "../constants/routes";
 
 export default function Home() {
   const { isAuthenticated } = useAuth();

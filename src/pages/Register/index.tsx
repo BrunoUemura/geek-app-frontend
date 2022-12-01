@@ -2,11 +2,11 @@ import Link from "next/link";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 
-import { Button } from "../../components/Feature/AuthForm/Button";
-import { Input } from "../../components/Feature/AuthForm/Input";
+import { Button } from "../../components/AuthForm/Button";
+import { Input } from "../../components/AuthForm/Input";
 import { useAuth } from "../../hooks/useAuth";
-import { ROUTES } from "../../routes";
-import { registerService } from "../../services/authService";
+import { ROUTES } from "../../constants/routes";
+import { registerService } from "../../services/http/auth";
 
 export default function Register() {
   const { isAuthenticated } = useAuth();

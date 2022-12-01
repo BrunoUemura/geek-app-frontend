@@ -2,10 +2,10 @@ import Link from "next/link";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 
-import { Button } from "../../components/Feature/AuthForm/Button";
-import { Input } from "../../components/Feature/AuthForm/Input";
+import { Button } from "../../components/AuthForm/Button";
+import { Input } from "../../components/AuthForm/Input";
 import { useAuth } from "../../hooks/useAuth";
-import { ROUTES } from "../../routes";
+import { ROUTES } from "../../constants/routes";
 
 export default function Login() {
   const { isAuthenticated, authenticate } = useAuth();

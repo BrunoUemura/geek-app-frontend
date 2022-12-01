@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-import { loginService } from "../services/authService";
-import { IContext, IAuthProvider, IUser } from "../types/IAuthContext";
+import { loginService } from "../services/http/auth";
+import { IContext, IAuthProvider, IUser } from "../@types/IAuthContext";
 import {
   deleteUserLocalStorage,
   getUserLocalStorage,
   setUserLocalStorage,
-} from "../utils/authUtils";
+} from "../utils/localStorage";
 
 export const AuthContext = createContext<IContext>({} as IContext);
 

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { ILists } from "../../types/ILists";
-import { listService } from "../../services/listService";
+import { ILists } from "../../@types/ILists";
+import { listService } from "../../services/http/list";
 import { useAuth } from "../../hooks/useAuth";
 import { Button } from "../../components/UI/Button";
 import { Modal } from "../../components/UI/Modal";
-import { RenderList } from "../../components/Feature/List/RenderList";
+import { RenderList } from "../../components/List/components/RenderList";
 
 export default function Lists() {
   const { id, token, logout } = useAuth();
