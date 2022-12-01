@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { ILists } from "../../types/ILists";
 import { listService } from "../../services/listService";
 import { useAuth } from "../../hooks/useAuth";
-import { ROUTES } from "../../routes/routes";
+import { ROUTES } from "../../routes";
 import { Button } from "../../components/UI/Button";
 import { Modal } from "../../components/UI/Modal";
 import { RenderList } from "./RenderList";
+import Router from "next/router";
 
-export function Lists() {
-  const navigate = useNavigate();
+export default function Lists() {
   const { isAuthenticated, id, token, logout } = useAuth();
 
   const [lists, setLists] = useState<ILists[] | null>([]);
@@ -44,10 +43,8 @@ export function Lists() {
   ];
 
   useEffect(() => {
-    if (!isAuthenticated) return navigate(ROUTES.LOGIN, { replace: true });
-
     (async () => {
-      const response = await listService.fetchListByUserId(id, token);
+      const response = await listService.fetchListByUserId(String(id));
 
       if (!response) {
         logout();
@@ -57,7 +54,7 @@ export function Lists() {
       setLists(response);
       setIsLoading(!isLoading);
     })();
-  }, [isAuthenticated]);
+  }, []);
 
   const inputsCleanUp = () => {
     setTitle("");
@@ -82,7 +79,7 @@ export function Lists() {
       logout();
     }
 
-    navigate(0);
+    location.reload();
   };
 
   const handleCancelNewList = () => setIsModalOpen(false);

@@ -1,35 +1,48 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 import { ListHeader } from "../../../components/Feature/ListHeader";
 import { Button } from "../../../components/UI/Button";
 import { Modal } from "../../../components/UI/Modal";
 import { useAuth } from "../../../hooks/useAuth";
-import { ROUTES } from "../../../routes/routes";
+import { ROUTES } from "../../../routes";
 import { listItemService, listService } from "../../../services/listService";
 import { ILists } from "../../../types/ILists";
 import { RenderItems } from "./RenderItems";
 
-const listInitialState = {
-  id: "",
-  userId: "",
-  title: "",
-  category: "",
-  description: "",
-  listItem: [],
-  createdAt: new Date(),
-  updatedAt: new Date(),
+export const getServerSideProps: GetServerSideProps<{ list: ILists }> = async (
+  context
+) => {
+  const { id } = context.query;
+  const url = `${process.env.BACKEND_API}/list/${id}`;
+
+  const res = await fetch(url);
+  const { data } = await res.json();
+
+  if (data === 0) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { list: data },
+  };
 };
 
-export function ListsDetails() {
-  const navigate = useNavigate();
-  const { id } = useParams();
+export default function ListsDetails({
+  list,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const router = useRouter();
+  const { id } = router.query;
+
   const { isAuthenticated, logout, token } = useAuth();
 
   const [isAwaitingSave, setIsAwaitingSave] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [list, setList] = useState<ILists | null>(listInitialState);
 
   const [title, setTitle] = useState<string>("");
   const [season, setSeason] = useState<number>(0);
@@ -106,32 +119,16 @@ export function ListsDetails() {
       logout();
     }
 
-    navigate(0);
+    location.reload();
   };
 
   const handleCancelNewList = () => setIsModalOpen(false);
-
-  useEffect(() => {
-    if (!isAuthenticated) return navigate(ROUTES.LOGIN, { replace: true });
-
-    (async () => {
-      const result = await listService.fetchListByListId(id || "", token || "");
-
-      if (!result) {
-        logout();
-        return;
-      }
-
-      setList(result);
-      setIsLoading(!isLoading);
-    })();
-  }, [isAuthenticated]);
 
   if (!list) {
     return (
       <div>
         <span>No List found for id {id}</span>
-        <Link to={ROUTES.LIST}>
+        <Link href={ROUTES.LIST}>
           <button>Go back</button>
         </Link>
       </div>
@@ -142,9 +139,10 @@ export function ListsDetails() {
     <div className="w-screen h-screen p-10">
       <ListHeader list={list} />
 
-      <div className="mt-8 mb-4">
-        <Button label="Add Item" onClick={() => setIsModalOpen(true)} />
-      </div>
+      <ShowNewItemButton
+        isAuthenticated={isAuthenticated}
+        setIsModalOpen={setIsModalOpen}
+      />
 
       {isModalOpen && (
         <Modal
@@ -158,7 +156,25 @@ export function ListsDetails() {
         />
       )}
 
-      <RenderItems isLoading={isLoading} items={list.listItem} />
+      <RenderItems isLoading={false} items={list.listItem} />
     </div>
   );
 }
+
+interface ShowNewItemButtonProps {
+  isAuthenticated: boolean | undefined;
+  setIsModalOpen: (value: any) => void;
+}
+
+const ShowNewItemButton = ({
+  isAuthenticated,
+  setIsModalOpen,
+}: ShowNewItemButtonProps) => {
+  if (!isAuthenticated) return <div className="mt-8 mb-4"></div>;
+
+  return (
+    <div className="mt-8 mb-4">
+      <Button label="Add Item" onClick={() => setIsModalOpen(true)} />
+    </div>
+  );
+};

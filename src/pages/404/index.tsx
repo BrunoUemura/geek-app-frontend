@@ -1,17 +1,20 @@
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../routes/routes";
+import Router from "next/router";
+import { ROUTES } from "../../routes";
 
-export function NotFound() {
-  const navigate = useNavigate();
-
+export default function NotFound() {
   const handleGoBack = () => {
-    return navigate(ROUTES.LIST, { replace: true });
+    return Router.push(ROUTES.ROOT);
   };
 
   return (
-    <div>
+    <div className="w-screen h-screen flex flex-col justify-center items-center">
       <h1>Oops! You've reached a non explored area...</h1>
-      <button onClick={handleGoBack}>Go back to Home</button>
+      <button
+        className="bg-black text-white p-2 rounded-md"
+        onClick={handleGoBack}
+      >
+        Go back to Home
+      </button>
     </div>
   );
 }

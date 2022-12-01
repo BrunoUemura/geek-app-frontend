@@ -1,4 +1,3 @@
-import React from "react";
 import { List } from "../../components/Feature/List";
 import { LoaderSpinner } from "../../components/UI/Loader";
 import { ILists } from "../../types/ILists";

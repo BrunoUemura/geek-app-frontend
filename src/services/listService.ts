@@ -1,19 +1,11 @@
 import { api } from "./api";
 import { ILists } from "../types/ILists";
 
-async function fetchListByListId(
-  listId: string,
-  token: string
-): Promise<ILists | null> {
+async function fetchListByListId(listId: string): Promise<ILists | null> {
   try {
     const url = `/list/${listId}`;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
 
-    const { data: response } = await api.get(url, config);
+    const { data: response } = await api.get(url);
 
     return response?.data;
   } catch (error) {
@@ -21,19 +13,11 @@ async function fetchListByListId(
   }
 }
 
-async function fetchListByUserId(
-  userId: string = "",
-  token: string = ""
-): Promise<ILists[] | null> {
+async function fetchListByUserId(userId: string): Promise<ILists[] | null> {
   try {
     const url = `/list?userId=${userId}`;
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
 
-    const { data: response } = await api.get(url, config);
+    const { data: response } = await api.get(url);
 
     return response?.data;
   } catch (error) {

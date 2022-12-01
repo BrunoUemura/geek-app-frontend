@@ -1,13 +1,13 @@
+import Link from "next/link";
+import Router from "next/router";
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
 
 import { Button } from "../../components/Feature/AuthForm/Button";
 import { Input } from "../../components/Feature/AuthForm/Input";
 import { useAuth } from "../../hooks/useAuth";
-import { ROUTES } from "../../routes/routes";
+import { ROUTES } from "../../routes";
 
-export function Login() {
-  const navigate = useNavigate();
+export default function Login() {
   const { isAuthenticated, authenticate } = useAuth();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -16,7 +16,7 @@ export function Login() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      return navigate(ROUTES.LIST, { replace: true });
+      Router.push(ROUTES.LIST);
     }
   }, [isAuthenticated]);
 
@@ -50,7 +50,7 @@ export function Login() {
           <p className="text-gray-500">Not registered yet?&nbsp;</p>
           <Link
             className="text-gray-700 hover:text-gray-900 hover:underline"
-            to={ROUTES.REGISTER}
+            href={ROUTES.REGISTER}
           >
             Click hete to sign up
           </Link>

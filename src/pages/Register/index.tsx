@@ -1,14 +1,14 @@
+import Link from "next/link";
+import Router from "next/router";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 
 import { Button } from "../../components/Feature/AuthForm/Button";
 import { Input } from "../../components/Feature/AuthForm/Input";
 import { useAuth } from "../../hooks/useAuth";
-import { ROUTES } from "../../routes/routes";
+import { ROUTES } from "../../routes";
 import { registerService } from "../../services/authService";
 
-export function Register() {
-  const navigate = useNavigate();
+export default function Register() {
   const { isAuthenticated } = useAuth();
 
   const [name, setName] = useState("");
@@ -17,7 +17,7 @@ export function Register() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      return navigate(ROUTES.LIST, { replace: true });
+      Router.push(ROUTES.LIST);
     }
   }, []);
 
@@ -26,7 +26,7 @@ export function Register() {
     const response = await registerService(name, email, password);
 
     if (response?.status === 201) {
-      return navigate(ROUTES.LOGIN, { replace: true });
+      Router.push(ROUTES.LOGIN);
     }
   };
 
@@ -47,7 +47,7 @@ export function Register() {
           <p className="text-gray-500">Already registered?&nbsp;</p>
           <Link
             className="text-gray-700 hover:text-gray-900 hover:underline"
-            to={ROUTES.LOGIN}
+            href={ROUTES.LOGIN}
           >
             Click hete to sign in
           </Link>

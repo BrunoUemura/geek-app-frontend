@@ -6,8 +6,8 @@ export function List({ lists }: ListProps) {
     <div className="flex flex-col mt-8">
       {lists?.map((list) => {
         return (
-          <div className="mb-3">
-            <ListCard key={list.id} list={list} />
+          <div className="mb-3" key={list.id}>
+            <ListCard list={list} />
           </div>
         );
       })}
