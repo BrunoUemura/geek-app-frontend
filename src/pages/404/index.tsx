@@ -8,7 +8,7 @@ export default function NotFound() {
 
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
-      <h1>Oops! You've reached a non explored area...</h1>
+      <h1>Oops! You&apos;ve reached a non explored area...</h1>
       <button
         className="bg-black text-white p-2 rounded-md"
         onClick={handleGoBack}
