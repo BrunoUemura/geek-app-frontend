@@ -6,9 +6,11 @@ import { useAuth } from "../../hooks/useAuth";
 import { Button } from "../../components/UI/Button";
 import { Modal } from "../../components/UI/Modal";
 import { RenderList } from "../../components/List/components/RenderList";
+import Router from "next/router";
+import { ROUTES } from "../../constants/routes";
 
 export default function Lists() {
-  const { id, token, logout } = useAuth();
+  const { id, token, logout, isAuthenticated } = useAuth();
 
   const [lists, setLists] = useState<ILists[] | null>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -39,6 +41,12 @@ export default function Lists() {
       setState: setDescription,
     },
   ];
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      Router.push(ROUTES.LOGIN);
+    }
+  }, []);
 
   useEffect(() => {
     (async () => {
