@@ -1,20 +1,16 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 
 import { ItemCardProps } from "./types";
 import { LabelText } from "../../UI/LabelText";
 import noLogo from "../../../assets/nologo.png";
+import Image from "next/image";
 
 export function ItemDetails({ item }: ItemCardProps) {
   const [expandMode, setExpandMode] = useState<boolean>(true);
 
   return (
     <div className="h-4/5 flex items-center mb-4 sm:h-full">
-      <img
-        className="h-full"
-        src={item.image || noLogo}
-        alt={`${item.title} image`}
-      />
+      <img className="h-full" src={item.image} alt={`${item.title} image`} />
 
       <div className="pl-5 text-sm sm:flex sm:flex-col sm:text-lg">
         <LabelText label="Title" text={item.title} />
