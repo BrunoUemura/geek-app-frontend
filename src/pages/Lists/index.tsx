@@ -46,9 +46,7 @@ export default function Lists() {
     if (!isAuthenticated) {
       Router.push(ROUTES.LOGIN);
     }
-  }, []);
 
-  useEffect(() => {
     (async () => {
       const response = await listService.fetchListByUserId(String(id));
 
