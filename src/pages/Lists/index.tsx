@@ -9,7 +9,7 @@ import { RenderList } from "../../components/List/components/RenderList";
 import Router from "next/router";
 import { ROUTES } from "../../constants/routes";
 
-export default function lists() {
+export default function Lists() {
   const { id, token, logout, isAuthenticated } = useAuth();
 
   const [lists, setLists] = useState<ILists[] | null>([]);
