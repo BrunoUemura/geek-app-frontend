@@ -1,7 +1,7 @@
 export const ROUTES = Object.freeze({
   ROOT: "/",
-  LIST: "/Lists",
-  LOGIN: "/Login",
-  REGISTER: "/Register",
+  LIST: "lists",
+  LOGIN: "login",
+  REGISTER: "register",
   NOT_FOUND: "*",
 });

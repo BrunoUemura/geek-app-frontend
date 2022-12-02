@@ -7,7 +7,7 @@ import { Input } from "../../components/AuthForm/Input";
 import { useAuth } from "../../hooks/useAuth";
 import { ROUTES } from "../../constants/routes";
 
-export default function Login() {
+export default function login() {
   const { isAuthenticated, authenticate } = useAuth();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);

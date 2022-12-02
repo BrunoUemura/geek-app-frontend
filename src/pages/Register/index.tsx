@@ -8,7 +8,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { ROUTES } from "../../constants/routes";
 import { registerService } from "../../services/http/auth";
 
-export default function Register() {
+export default function register() {
   const { isAuthenticated } = useAuth();
 
   const [name, setName] = useState("");
