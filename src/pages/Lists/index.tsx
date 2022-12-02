@@ -58,7 +58,7 @@ export default function Lists() {
       setLists(response);
       setIsLoading(!isLoading);
     })();
-  }, []);
+  });
 
   const inputsCleanUp = () => {
     setTitle("");

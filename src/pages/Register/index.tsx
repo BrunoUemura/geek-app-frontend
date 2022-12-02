@@ -19,7 +19,7 @@ export default function Register() {
     if (isAuthenticated) {
       Router.push(ROUTES.LIST);
     }
-  }, []);
+  });
 
   const handleSignUp = async (event: React.FormEvent) => {
     event.preventDefault();

@@ -1,5 +1,5 @@
 import Router from "next/router";
-import { ROUTES } from "../../constants/routes";
+import { ROUTES } from "../constants/routes";
 
 export default function NotFound() {
   const handleGoBack = () => {
