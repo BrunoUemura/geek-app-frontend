@@ -7,9 +7,9 @@ interface InputProps {
 export function Input({ label, type, setInputValue }: InputProps) {
   return (
     <div className="w-full flex flex-col">
-      <label className="mb-1">{label}</label>
+      <label className="mb-1 text-white">{label}</label>
       <input
-        className="mb-4 p-2 bg-gray-200 outline-none border-b border-gray-700 focus:border"
+        className="mb-4 p-2 bg-neutral-600 outline-none border-b border-neutral-400 text-white focus:border"
         type={type}
         required
         onChange={(event) => setInputValue(event.target.value)}

@@ -12,14 +12,14 @@ export function ListHeader({ list }: ListHeaderProps) {
 
   if (!isAuthenticated) {
     return (
-      <div className="flex flex-col justify-center bg-white sm:flex-row sm:justify-between">
+      <div className="flex flex-col justify-center bg-neutral-700 sm:flex-row sm:justify-between">
         <ListHeaderDetails list={list} />
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col justify-center bg-white sm:flex-row sm:justify-between">
+    <div className="flex flex-col justify-center bg-neutral-700 sm:flex-row sm:justify-between">
       <ListHeaderDetails list={list} />
       <ListHeaderOwnerView list={list} />
     </div>

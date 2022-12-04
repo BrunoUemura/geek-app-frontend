@@ -31,7 +31,7 @@ export function ItemDetails({ item }: ItemCardProps) {
             ) : null}
 
             <a
-              className="text-gray-700 hover:underline hover:text-black"
+              className="text-white hover:underline hover:text-neutral-200"
               href={item.link}
               target="_blank"
               rel="noreferrer"

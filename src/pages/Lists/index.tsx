@@ -91,7 +91,7 @@ export default function Lists() {
   const handleCancelNewList = () => setIsModalOpen(false);
 
   return (
-    <div className="w-screen h-screen p-10">
+    <div className="w-screen h-screen p-10 bg-neutral-800">
       <div className="mb-8">
         <Button label="New List" onClick={() => setIsModalOpen(true)} />
       </div>

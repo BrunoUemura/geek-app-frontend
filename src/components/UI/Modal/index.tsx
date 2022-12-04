@@ -30,29 +30,28 @@ export function Modal({
   return (
     <div className="">
       <ReactModal
-        // className="flex flex-col top-1/2 left-1/2 right-auto bottom-auto p-10 border border-gray-600 bg-white"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Modal"
         ariaHideApp={false}
       >
-        <h2 className="font-semibold text-2xl mb-3">{modalTitle}</h2>
-        {subtitle && <h3>{subtitle}</h3>}
+        <h2 className="font-semibold text-2xl mb-3 text-white">{modalTitle}</h2>
+        {subtitle && <h3 className="text-white">{subtitle}</h3>}
 
         <div className="mb-4">
           {fields?.map((field, index) => (
             <div key={index} className="flex justify-between mb-1 p-1">
-              <label>{field.label}:&nbsp;</label>
+              <label className="text-white">{field.label}:&nbsp;</label>
               {field?.fieldType === "textarea" ? (
                 <textarea
-                  className="px-2 bg-white"
+                  className="px-2 bg-neutral-600 text-white"
                   defaultValue={field.inputValue}
                   onChange={(event) => field.setState(event.target.value)}
                 ></textarea>
               ) : (
                 <input
-                  className="px-2 bg-white"
+                  className="px-2 bg-neutral-600 text-white"
                   type={field.inputType}
                   value={field.inputValue}
                   onChange={(event) => field.setState(event.target.value)}
@@ -66,7 +65,7 @@ export function Modal({
           {isAwaitingSave ? (
             <>
               <button
-                className="w-1/2 flex justify-center items-center text-white bg-blue-900"
+                className="w-1/2 flex justify-center items-center bg-blue-700 text-white"
                 disabled={true}
                 onClick={handleSaveEvent}
               >
@@ -90,7 +89,7 @@ export function Modal({
           ) : (
             <>
               <button
-                className="w-1/2 bg-gray-600 text-white hover:bg-blue-900"
+                className="w-1/2 bg-blue-700 text-white hover:bg-blue-600"
                 onClick={handleSaveEvent}
               >
                 {confirmLabel}

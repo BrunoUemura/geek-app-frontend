@@ -136,13 +136,13 @@ export function ItemOwnerView({ listId, item }: ItemCardProps) {
 
       <div className="h-1/5 flex items-center justify-between sm:flex-col sm:justify-evenly sm:mr-3 sm:h-full">
         <button
-          className="w-1/2 bg-gray-500 text-white py-1 hover:bg-gray-400 sm:w-full sm:px-2"
+          className="w-1/2 bg-neutral-500 text-white py-1 hover:bg-neutral-400 sm:w-full sm:px-2"
           onClick={() => setEditMode(true)}
         >
           Edit
         </button>
         <button
-          className="w-1/2 bg-gray-900 text-white py-1 hover:bg-gray-800 sm:w-full sm:px-2"
+          className="w-1/2 bg-neutral-900 text-white py-1 hover:bg-neutral-800 sm:w-full sm:px-2"
           onClick={() => setRemoveMode(true)}
         >
           Remove

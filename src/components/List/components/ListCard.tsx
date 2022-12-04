@@ -12,8 +12,8 @@ export function ListCard({ list }: ListCardProps) {
 
   return (
     <Link href={redirectTo}>
-      <div className="flex flex-col p-4 bg-white hover:shadow-md">
-        <h1 className="text-2xl mb-4 tracking-wide">{list.title}</h1>
+      <div className="flex flex-col p-4 bg-neutral-700 hover:shadow-md">
+        <h1 className="text-2xl text-white mb-4 tracking-wide">{list.title}</h1>
         <LabelText label="Category" text={list.category} />
         <LabelText label="Total Items" text={String(list.listItem.length)} />
       </div>

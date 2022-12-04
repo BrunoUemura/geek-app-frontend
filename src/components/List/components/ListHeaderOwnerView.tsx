@@ -76,7 +76,7 @@ export function ListHeaderOwnerView({ list }: ListHeaderProps) {
       logout();
     }
 
-    Router.push(ROUTES.LIST);
+    Router.push(ROUTES.ROOT);
   };
 
   if (!isAuthenticated) {
@@ -111,13 +111,13 @@ export function ListHeaderOwnerView({ list }: ListHeaderProps) {
 
       <div className="flex items-center justify-between sm:flex-col sm:justify-evenly sm:mr-3">
         <button
-          className="w-1/2 bg-gray-500 text-white py-1 sm:w-full sm:px-2"
+          className="w-1/2 bg-neutral-500 text-white py-1 sm:w-full sm:px-2 hover:bg-neutral-400"
           onClick={() => setEditMode(true)}
         >
           Edit
         </button>
         <button
-          className="w-1/2 bg-gray-900 text-white py-1 sm:w-full sm:px-2"
+          className="w-1/2 bg-neutral-900 text-white py-1 sm:w-full sm:px-2 hover:bg-neutral-800"
           onClick={() => setRemoveMode(true)}
         >
           Remove

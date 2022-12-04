@@ -33,12 +33,14 @@ export default function Login() {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
+    <div className="w-screen h-screen flex justify-center items-center bg-neutral-800">
       <form
         onSubmit={handleSignIn}
-        className="bg-white p-8 sm:w-4/5 md:w-4/5 lg:w-1/3"
+        className="bg-neutral-700 p-8 sm:w-4/5 md:w-4/5 lg:w-1/3"
       >
-        <h1 className="font-medium uppercase text-2xl mb-8">Login</h1>
+        <h1 className="font-medium uppercase text-2xl text-white mb-8">
+          Login
+        </h1>
 
         <Input label="Email" type="text" setInputValue={setEmail} />
         <Input label="Password" type="password" setInputValue={setPassword} />
@@ -47,11 +49,8 @@ export default function Login() {
         </div>
 
         <div className="flex mt-4">
-          <p className="text-gray-500">Not registered yet?&nbsp;</p>
-          <Link
-            className="text-gray-700 hover:text-gray-900 hover:underline"
-            href={ROUTES.REGISTER}
-          >
+          <p className=" text-neutral-400">Not registered yet?&nbsp;</p>
+          <Link className="text-white hover:underline" href={ROUTES.REGISTER}>
             Click hete to sign up
           </Link>
         </div>

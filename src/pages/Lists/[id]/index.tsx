@@ -126,17 +126,17 @@ export default function ListsDetails({
 
   if (!list) {
     return (
-      <div>
-        <span>No List found for id {id}</span>
-        <Link href={ROUTES.LIST}>
-          <button>Go back</button>
+      <div className="w-screen h-screen bg-neutral-800 flex flex-col justify-center items-center">
+        <span className="text-white">No List found for id {id}</span>
+        <Link href={ROUTES.ROOT}>
+          <button className="bg-neutral-700 text-white p-2">Go back</button>
         </Link>
       </div>
     );
   }
 
   return (
-    <div className="w-screen h-screen p-10">
+    <div className="min-w-screen min-h-screen p-10 bg-neutral-800">
       <ListHeader list={list} />
 
       <ShowNewItemButton
