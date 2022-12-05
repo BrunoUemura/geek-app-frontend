@@ -25,3 +25,12 @@ export async function registerService(
     return null;
   }
 }
+
+export async function validateAuth(token: string) {
+  try {
+    const response = await api.post("/auth/validate", { token });
+    return response;
+  } catch (error) {
+    return null;
+  }
+}

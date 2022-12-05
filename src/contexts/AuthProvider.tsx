@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { loginService } from "../services/http/auth";
+import { loginService, validateAuth } from "../services/http/auth";
 import { IContext, IAuthProvider, IUser } from "../@types/IAuthContext";
 import {
   deleteUserLocalStorage,
@@ -15,9 +15,21 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   useEffect(() => {
     const user = getUserLocalStorage();
 
-    if (user) {
-      setUser(user);
+    if (!user) {
+      logout();
+      return;
     }
+
+    (async () => {
+      const isAuthValid = await validateAuth(user?.token);
+
+      if (!isAuthValid) {
+        logout();
+        return;
+      }
+
+      setUser(user);
+    })();
   }, []);
 
   async function authenticate(email: string, password: string) {
