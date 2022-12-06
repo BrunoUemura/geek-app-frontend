@@ -50,6 +50,7 @@ export default function ListsDetails({
   const [episode, setEpisode] = useState<number>(0);
   const [chapter, setChapter] = useState<number>(0);
   const [link, setLink] = useState<string>("");
+  const [status, setStatus] = useState<string>("");
   const [image, setImage] = useState<string>("");
 
   const modalProps = [
@@ -76,6 +77,12 @@ export default function ListsDetails({
       inputType: "number",
       inputValue: chapter,
       setState: setChapter,
+    },
+    {
+      label: "Status",
+      inputType: "text",
+      inputValue: status,
+      setState: setStatus,
     },
     {
       label: "Link",
@@ -142,10 +149,21 @@ export default function ListsDetails({
 
       <ListHeader list={list} />
 
-      <ShowNewItemButton
-        isAuthenticated={isAuthenticated}
-        setIsModalOpen={setIsModalOpen}
-      />
+      <div className="mt-8 mb-4 flex flex-col justify-between sm:flex-row">
+        <ShowNewItemButton
+          isAuthenticated={isAuthenticated}
+          setIsModalOpen={setIsModalOpen}
+        />
+
+        <div className="flex mt-2 sm:mt-0">
+          <input
+            className="p-2 bg-neutral-600 text-white w-2/3 focus:outline-none"
+            type="text"
+            placeholder="Search an item..."
+          />
+          <button className="px-3 bg-black text-white w-1/3">Search</button>
+        </div>
+      </div>
 
       {isModalOpen && (
         <Modal
@@ -173,11 +191,7 @@ const ShowNewItemButton = ({
   isAuthenticated,
   setIsModalOpen,
 }: ShowNewItemButtonProps) => {
-  if (!isAuthenticated) return <div className="mt-8 mb-4"></div>;
+  if (!isAuthenticated) return null;
 
-  return (
-    <div className="mt-8 mb-4">
-      <Button label="Add Item" onClick={() => setIsModalOpen(true)} />
-    </div>
-  );
+  return <Button label="Add Item" onClick={() => setIsModalOpen(true)} />;
 };

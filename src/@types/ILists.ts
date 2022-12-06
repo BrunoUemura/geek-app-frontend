@@ -16,6 +16,7 @@ export interface IListItem {
   season: number;
   episode: number;
   chapter: null;
+  status: string;
   link: string;
   image: string;
   createdAt: Date;

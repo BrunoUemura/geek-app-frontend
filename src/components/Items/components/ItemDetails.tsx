@@ -12,8 +12,8 @@ export function ItemDetails({ item }: ItemCardProps) {
   const [expandMode, setExpandMode] = useState<boolean>(true);
 
   return (
-    <div className="h-4/5 flex items-center mb-4 sm:h-full">
-      <div className="h-full w-28 overflow-hidden">
+    <div className="h-4/5 flex items-center mb-1 sm:h-full">
+      <div className="flex justify-center items-center h-full w-28 overflow-hidden">
         <img
           className="object-contain"
           src={item.image || "/default-image.jpg"}
@@ -34,6 +34,10 @@ export function ItemDetails({ item }: ItemCardProps) {
 
             {item?.chapter ? (
               <LabelText label="Chapter" text={String(item.chapter)} />
+            ) : null}
+
+            {item?.status ? (
+              <LabelText label="Status" text={String(item.status)} />
             ) : null}
 
             <a

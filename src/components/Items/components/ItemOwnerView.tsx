@@ -21,6 +21,7 @@ export function ItemOwnerView({ listId, item }: ItemCardProps) {
   const [newSeason, setNewSeason] = useState<number>(item.season);
   const [newEpisode, setNewEpisode] = useState<number>(item.episode);
   const [newChapter, setNewChapter] = useState<number>(item.chapter || 0);
+  const [status, setStatus] = useState<string>(item.status);
   const [newLink, setNewLink] = useState<string>(item.link);
   const [newImage, setNewImage] = useState<string>(item.image);
 
@@ -48,6 +49,12 @@ export function ItemOwnerView({ listId, item }: ItemCardProps) {
       inputType: "number",
       inputValue: newChapter,
       setState: setNewChapter,
+    },
+    {
+      label: "Status",
+      inputType: "status",
+      inputValue: status,
+      setState: setStatus,
     },
     {
       label: "Link",
@@ -136,13 +143,13 @@ export function ItemOwnerView({ listId, item }: ItemCardProps) {
 
       <div className="h-1/5 flex items-center justify-between sm:flex-col sm:justify-evenly sm:mr-3 sm:h-full">
         <button
-          className="w-1/2 bg-neutral-500 text-white py-1 hover:bg-neutral-400 sm:w-full sm:px-2"
+          className="w-1/2 h-full bg-neutral-500 text-white py-1 hover:bg-neutral-400 sm:w-full sm:h-8 sm:px-2"
           onClick={() => setEditMode(true)}
         >
           Edit
         </button>
         <button
-          className="w-1/2 bg-neutral-900 text-white py-1 hover:bg-neutral-800 sm:w-full sm:px-2"
+          className="w-1/2 h-full bg-neutral-900 text-white py-1 hover:bg-neutral-800 sm:w-full sm:h-8 sm:px-2"
           onClick={() => setRemoveMode(true)}
         >
           Remove
