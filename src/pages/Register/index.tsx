@@ -11,6 +11,7 @@ import { registerService } from "../../services/http/auth";
 export default function Register() {
   const { isAuthenticated } = useAuth();
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,10 +24,17 @@ export default function Register() {
 
   const handleSignUp = async (event: React.FormEvent) => {
     event.preventDefault();
-    const response = await registerService(name, email, password);
+    setIsLoading(true);
 
-    if (response?.status === 201) {
-      Router.push(ROUTES.LOGIN);
+    try {
+      const response = await registerService(name, email, password);
+      if (response?.status === 201) {
+        Router.push(ROUTES.LOGIN);
+      }
+
+      setIsLoading(false);
+    } catch (error) {
+      alert("Sign Up failed");
     }
   };
 
@@ -36,12 +44,14 @@ export default function Register() {
         onSubmit={handleSignUp}
         className="bg-neutral-700 p-8 sm:w-4/5 md:w-4/5 lg:w-1/3"
       >
-        <h1 className="font-medium uppercase text-2xl mb-8">Register</h1>
+        <h1 className="font-medium uppercase text-2xl text-white mb-8">
+          Register
+        </h1>
 
         <Input label="Name" type="text" setInputValue={setName} />
         <Input label="Email" type="text" setInputValue={setEmail} />
         <Input label="Password" type="password" setInputValue={setPassword} />
-        <Button label="Register" />
+        <Button label="Register" isLoading={isLoading} />
 
         <div className="flex mt-4">
           <p className="text-neutral-400">Already registered?&nbsp;</p>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Router from "next/router";
 
 import { ILists } from "../../@types/ILists";
 import { listService } from "../../services/http/list";
@@ -6,7 +7,6 @@ import { useAuth } from "../../hooks/useAuth";
 import { Button } from "../../components/UI/Button";
 import { Modal } from "../../components/UI/Modal";
 import { RenderList } from "../../components/List/components/RenderList";
-import Router from "next/router";
 import { ROUTES } from "../../constants/routes";
 
 export default function Lists() {

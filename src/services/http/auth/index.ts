@@ -10,13 +10,13 @@ export async function loginService(email: string, password: string) {
 }
 
 export async function registerService(
-  name: string,
+  username: string,
   email: string,
   password: string
 ) {
   try {
     const response = await api.post("/auth/signup", {
-      name,
+      username,
       email,
       password,
     });
