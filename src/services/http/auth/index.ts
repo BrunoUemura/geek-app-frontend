@@ -3,7 +3,7 @@ import { api } from "../../api";
 export async function loginService(email: string, password: string) {
   try {
     const url = "/auth/signin";
-    const body = { email, password };
+    const body = { email: email.toLowerCase(), password };
     const response = await api.post(url, body);
     return response.data;
   } catch (error) {
@@ -18,7 +18,7 @@ export async function registerService(
 ) {
   try {
     const url = "/auth/signup";
-    const body = { username, email, password };
+    const body = { username, email: email.toLowerCase(), password };
     const response = await api.post(url, body);
     return response;
   } catch (error) {

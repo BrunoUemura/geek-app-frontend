@@ -29,6 +29,7 @@ export default function Login() {
       setIsLoading(false);
     } catch (error) {
       alert("Authentication failed");
+      location.reload();
     }
   };
 
