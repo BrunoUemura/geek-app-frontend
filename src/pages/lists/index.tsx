@@ -92,7 +92,7 @@ export default function Lists() {
   const handleCancelNewList = () => setIsModalOpen(false);
 
   return (
-    <div className="w-screen h-screen p-10 bg-neutral-800">
+    <div className="w-screen min-h-screen p-10 bg-neutral-800">
       <Navbar />
 
       <div className="mt-12 mb-8">

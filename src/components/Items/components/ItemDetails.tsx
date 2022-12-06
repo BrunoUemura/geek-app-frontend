@@ -13,7 +13,13 @@ export function ItemDetails({ item }: ItemCardProps) {
 
   return (
     <div className="h-4/5 flex items-center mb-4 sm:h-full">
-      <img className="h-full" src={item.image} alt={`${item.title} image`} />
+      <div className="h-full w-28 overflow-hidden">
+        <img
+          className="object-contain"
+          src={item.image || "/default-image.jpg"}
+          alt={`${item.title}`}
+        />
+      </div>
 
       <div className="pl-5 text-sm sm:flex sm:flex-col sm:text-lg">
         <LabelText label="Title" text={item.title} />
