@@ -8,6 +8,7 @@ import { Button } from "../../components/UI/Button";
 import { Modal } from "../../components/UI/Modal";
 import { RenderList } from "../../components/List/components/RenderList";
 import { ROUTES } from "../../constants/routes";
+import Navbar from "../../components/Navbar";
 
 export default function Lists() {
   const { id, token, logout, isAuthenticated } = useAuth();
@@ -92,7 +93,9 @@ export default function Lists() {
 
   return (
     <div className="w-screen h-screen p-10 bg-neutral-800">
-      <div className="mb-8">
+      <Navbar />
+
+      <div className="mt-12 mb-8">
         <Button label="New List" onClick={() => setIsModalOpen(true)} />
       </div>
 

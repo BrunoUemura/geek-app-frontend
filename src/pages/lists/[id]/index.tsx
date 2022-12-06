@@ -11,6 +11,7 @@ import { ROUTES } from "../../../constants/routes";
 import { listItemService } from "../../../services/http/list";
 import { ILists } from "../../../@types/ILists";
 import { RenderItems } from "../../../components/Items/components/RenderItems";
+import Navbar from "../../../components/Navbar";
 
 export const getServerSideProps: GetServerSideProps<{ list: ILists }> = async (
   context
@@ -137,6 +138,8 @@ export default function ListsDetails({
 
   return (
     <div className="min-w-screen min-h-screen p-10 bg-neutral-800">
+      <Navbar />
+
       <ListHeader list={list} />
 
       <ShowNewItemButton

@@ -2,7 +2,9 @@ import { api } from "../../api";
 
 export async function loginService(email: string, password: string) {
   try {
-    const response = await api.post("/auth/signin", { email, password });
+    const url = "/auth/signin";
+    const body = { email, password };
+    const response = await api.post(url, body);
     return response.data;
   } catch (error) {
     return null;
@@ -15,11 +17,9 @@ export async function registerService(
   password: string
 ) {
   try {
-    const response = await api.post("/auth/signup", {
-      username,
-      email,
-      password,
-    });
+    const url = "/auth/signup";
+    const body = { username, email, password };
+    const response = await api.post(url, body);
     return response;
   } catch (error) {
     return null;
@@ -28,7 +28,14 @@ export async function registerService(
 
 export async function validateAuth(token: string) {
   try {
-    const response = await api.post("/auth/validate", { token });
+    const url = "/auth/validate";
+    const body = { token };
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await api.post(url, body, config);
     return response;
   } catch (error) {
     return null;
