@@ -10,8 +10,6 @@ interface NavbarAuthProps {
 }
 
 export const NavbarAuth = ({ isAuthenticated }: NavbarAuthProps) => {
-  console.log(isAuthenticated);
-
   if (isAuthenticated) {
     return (
       <Image src={defaultUser} alt={"Default User"} width={40} height={40} />

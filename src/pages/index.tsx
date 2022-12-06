@@ -17,9 +17,9 @@ export default function Home() {
 
       <div className="flex flex-col justify-center items-center max-w-6xl px-10 md:flex-row md:">
         <div className="flex flex-col">
-          <h1 className="text-5xl text-white mb-10">
-            Manage your favorite <span>Anime</span>/<span>Shows</span>/
-            <span>Movies </span>
+          <h1 className="text-3xl text-white mb-10 sm:text-5xl">
+            Manage your favorite <span>Anime </span>/<span> Shows </span>/
+            <span> Movies </span>
             watching list
           </h1>
 
